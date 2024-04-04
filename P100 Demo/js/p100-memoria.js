@@ -23,6 +23,7 @@ $(function(){
         }
     }
 
+    console.log("hola");
     $(".carta").on("click",function(){
         $(this).toggleClass("carta-girada");
     });
