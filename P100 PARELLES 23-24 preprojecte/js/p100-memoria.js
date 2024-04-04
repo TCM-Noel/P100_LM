@@ -12,8 +12,6 @@ $(function(){
     f=1;
     c=1;
 
- 
-
     ampladaCarta=$(".carta").width(); 
     alcadaCarta=$(".carta").height();
     // mida del tauler
@@ -24,8 +22,8 @@ $(function(){
 
     carta=$("#f"+f+"c"+c);
     carta.css({
-        "left" :  ((c-1)*(ampladaCarta+separacioH)+separacioH)+"px",
-        "top"  :  ((f-1)*(alcadaCarta+separacioV) +separacioV)+"px"
+        "left" :  ((f-1)*(alcadaCarta+separacioV)+separacioV)+"px",
+        "top"  :  ((c-1)*(ampladaCarta+separacioH) +separacioH)+"px"
     });
     carta.find(".davant").addClass(jocCartes.pop());
    

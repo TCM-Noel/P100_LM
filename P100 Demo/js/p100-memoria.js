@@ -3,7 +3,7 @@ var separacioH=20, separacioV=20;
 var nFiles=2, nColumnes=2;
 
 var jocCartes = [
-    "carta14",
+    'carta14',
 ];
 
 $(function(){
@@ -23,27 +23,26 @@ $(function(){
         }
     }
 
-    console.log("hola");
     $(".carta").on("click",function(){
         $(this).toggleClass("carta-girada");
     });
 
 });
 
-function generarCarta(fila, columna) {
-    let f, c, carta;
-    f=fila;
-    c=columna;
-    
+function generarCarta(f, c) {
+
     let cartaID = `#f${f}c${c}`;
-    let cartaHTML = `<div class="carta" id="${cartaID}"><div class="cara darrera"></div><div class="cara davant"></div></div>`;
+    let cartaHTML = `<div class="carta" id="${cartaID}" style="left:${((f-1)*(alcadaCarta+separacioV)+separacioV)}px; top: ${((c-1)*(ampladaCarta+separacioH) +separacioH)}px"><div class="cara darrera"></div><div class="cara davant"></div></div>`;
     $('#tauler').append(cartaHTML);
 
-    carta = $(cartaID);
+    /*
+    let carta = $("#f"+f+"c"+c);
     carta.css({
-        "top": ((c - 1) * (ampladaCarta + separacioH) + separacioH) + "px",
-        "left": ((f - 1) * (alcadaCarta + separacioV) + separacioV) + "px"
+        "left" :  ((f-1)*(alcadaCarta+separacioV)+separacioV)+"px",
+        "top"  :  ((c-1)*(ampladaCarta+separacioH) +separacioH)+"px"
     });
+    $('#tauler').append(cartaHTML);*/
     
+    let carta = $("#f"+f+"c"+c);
     carta.find(".davant").addClass(jocCartes.pop());
 }
