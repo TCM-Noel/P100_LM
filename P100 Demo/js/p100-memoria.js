@@ -1,6 +1,6 @@
 var ampladaCarta, alcadaCarta;
 var separacioH=20, separacioV=20;
-var nFiles=3, nColumnes=3;
+var nFiles=4, nColumnes=4;
 
 var jocCartes = [
     'carta14',
@@ -10,12 +10,10 @@ var jocCartes = [
 
 $(function(){
     // mida del tauler
-        // 2 x 2 => 40
-        // 3 x 3 => 60
-        // 4 x 4 => 80
-    let totalRestar = 0
-    totalRestar = nFiles != 1 ? (20 * nFiles) - 20 : 0
-    console.log(totalRestar)
+        // 2 x 2 => 20
+        // 3 x 3 => 40
+        // 4 x 4 => 60
+    let totalRestar = nFiles != 1 ? 20 * (nFiles - 1) : 0;
     $("#tauler").css({
         "width" : `${120 * nColumnes - totalRestar}px`,
         "height": `${160 * nFiles - totalRestar}px`
