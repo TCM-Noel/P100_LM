@@ -17,7 +17,7 @@ var barallaMa2 = [
 ];
 
 $(function(){
-
+console.log("Funciona");
     // mida del tauler
         // 2 x 2 => 20
         // 3 x 3 => 40
