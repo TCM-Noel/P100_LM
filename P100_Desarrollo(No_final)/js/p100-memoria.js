@@ -17,7 +17,7 @@ var barallaMa2 = [
 ];
 
 $(function(){
-console.log("Funciona");
+
     // mida del tauler
         // 2 x 2 => 20
         // 3 x 3 => 40
@@ -27,8 +27,6 @@ console.log("Funciona");
         "width" : `${120 * nColumnes - totalRestar}px`,
         "height": `${160 * nFiles - totalRestar}px`
     });
-
-    console.log('Hola')
     
     ampladaCarta=$(".carta").width(); 
     alcadaCarta=$(".carta").height();
