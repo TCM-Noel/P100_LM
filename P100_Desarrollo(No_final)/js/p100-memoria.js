@@ -27,8 +27,7 @@ $(function(){
         "width" : `${120 * nColumnes - totalRestar}px`,
         "height": `${160 * nFiles - totalRestar}px`
     });
-    console.log("PRUEBAAAA")   
-    var prueba = 1;
+    
     ampladaCarta=$(".carta").width(); 
     alcadaCarta=$(".carta").height();
 
