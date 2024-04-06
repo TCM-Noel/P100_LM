@@ -1,14 +1,23 @@
 var ampladaCarta, alcadaCarta;
 var separacioH=20, separacioV=20;
-var nFiles=4, nColumnes=4;
+var nFiles=3, nColumnes=3;
 
-var jocCartes = [
+var barallaMa1 = [
     'carta14',
     'carta15',
-    'carta16'
+    'carta16',
+    'carta24'
+];
+
+var barallaMa2 = [
+    'carta14',
+    'carta15',
+    'carta16',
+    'carta24'
 ];
 
 $(function(){
+
     // mida del tauler
         // 2 x 2 => 20
         // 3 x 3 => 40
@@ -34,6 +43,11 @@ $(function(){
 
 });
 
+// TODO: Función que baraje el array
+function barajar(array) {
+    
+}
+
 function generarCarta(f, c) {
 
     let cartaID = `f${f}c${c}`;
@@ -46,5 +60,5 @@ function generarCarta(f, c) {
         "left"  :  ((c-1)*(ampladaCarta+separacioH)+separacioH)+"px"
     });
     
-    carta.find(".davant").addClass(jocCartes.pop());
+    carta.find(".davant").addClass(barallaMa1.pop());
 }
