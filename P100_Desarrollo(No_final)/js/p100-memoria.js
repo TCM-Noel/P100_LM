@@ -2,27 +2,19 @@ var ampladaCarta, alcadaCarta;
 var separacioH=20, separacioV=20;
 var nFiles=4, nColumnes=4;
 
-var barallaMa1 = [
-    'carta1',
-    'carta2',
-    'carta14',
-    'carta15',
-    'carta16',
-    'carta24',
-    'carta25',
-    'carta26'
-];
+    var barallaMa1 = [];
+    var barallaMa2 = [];
+    for(let i = 1; i <= 52; i++){
+        barallaMa1.push('carta' + i);
+    }
+    
+    barajar(barallaMa1);
+    
+    barallaMa1 = barallaMa1.slice(0,8);
+    barallaMa2 = barallaMa1.slice();
 
-var barallaMa2 = [
-    'carta1',
-    'carta2',
-    'carta14',
-    'carta15',
-    'carta16',
-    'carta24',
-    'carta25',
-    'carta26'
-];
+    
+
 
 $(function(){
     barajar(barallaMa1);
@@ -55,7 +47,7 @@ $(function(){
 // TODO: Función que baraje el array
 function barajar(array) {
     let quants = array.length;
-    for(let i=0;i<array.length;i++, quants--){
+    for(let i=0;i<array.length;i++){
         let rnd = Math.floor(Math.random()*quants);
         let aux = array[i];
         array[i]=array[rnd];
