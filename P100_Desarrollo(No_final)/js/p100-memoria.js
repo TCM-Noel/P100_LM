@@ -10,11 +10,10 @@ var nFiles=4, nColumnes=4;
     
     barajar(barallaMa1);
     
-    barallaMa1 = barallaMa1.slice(0,8);
+    barallaMa1 = barallaMa1.slice(0,nFiles*nColumnes/2);
     barallaMa2 = barallaMa1.slice();
 
     
-
 
 $(function(){
     barajar(barallaMa1);
@@ -23,10 +22,11 @@ $(function(){
         // 2 x 2 => 20
         // 3 x 3 => 40
         // 4 x 4 => 60
-    let totalRestar = nFiles != 1 ? 20 * (nFiles - 1) : 0;
+    let totalRestarFiles = nFiles != 1 ? 20 * (nFiles - 1) : 0;
+    let totalRestarColumnes = nFiles != 1 ? 20 * (nColumnes - 1) : 0;
     $("#tauler").css({
-        "width" : `${120 * nColumnes - totalRestar}px`,
-        "height": `${160 * nFiles - totalRestar}px`
+        "width" : `${120 * nColumnes - totalRestarColumnes}px`,
+        "height": `${160 * nFiles - totalRestarFiles}px`
     });
     
     ampladaCarta=$(".carta").width(); 
