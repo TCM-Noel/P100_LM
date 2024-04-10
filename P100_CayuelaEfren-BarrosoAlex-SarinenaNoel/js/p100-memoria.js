@@ -1,39 +1,80 @@
+// Variables globals
 var ampladaCarta, alcadaCarta;
 var separacioH=20, separacioV=20;
-var nFiles=4, nColumnes=4;
+var nFiles=3, nColumnes=4;
 
-var jocCartes = [
-    'carta14',
-    'carta15',
-    'carta16'
-];
+// Dues mans amb la que es generarà el joc
+var barallaMa1 = [];
+var barallaMa2 = [];
 
 $(function(){
-    // mida del tauler
+
+    // S'afegeixen totes les cartes a l'array 'barallaMa1'.
+    for(let i = 1; i <= 52; i++){
+        barallaMa1.push('carta' + i);
+    }
+
+    barrejar(barallaMa1); // Es barreja totes les cartes de la mà per tal de poder obtenir cartes aleatories en el joc.
+
+    barallaMa1 = barallaMa1.slice(0,(nFiles*nColumnes)/2); // Crea una copia de l'array original
+                                                           /* Es multiplica el nombre de files i columnes i es divideix entre 2
+                                                              per obtenir el total de cartes amb què es jugarà */
+    barallaMa2 = barallaMa1.slice();
+
+    // Es barrejen les dues mans per tal de obtenir dues mans diferents i així després jugar amb diferents cartes.
+    barrejar(barallaMa1);
+    barrejar(barallaMa2);
+    
+    // Càlcul per tal d'ajustar el taulell a la quantitat de cartes a jugar. Mida del tauler:
         // 2 x 2 => 20
         // 3 x 3 => 40
         // 4 x 4 => 60
-    let totalRestar = nFiles != 1 ? 20 * (nFiles - 1) : 0;
+    let totalRestarFiles = nFiles != 1 ? 20 * (nFiles - 1) : 0;
+    let totalRestarColumnes = nFiles != 1 ? 20 * (nColumnes - 1) : 0;
     $("#tauler").css({
-        "width" : `${120 * nColumnes - totalRestar}px`,
-        "height": `${160 * nFiles - totalRestar}px`
+        "width" : `${120 * nColumnes - totalRestarColumnes}px`,
+        "height": `${160 * nFiles - totalRestarFiles}px`
     });
     
+    // Agafa les mesures de les cartes
     ampladaCarta=$(".carta").width(); 
     alcadaCarta=$(".carta").height();
 
+    // Doble iteració per generar les cartes en el taulell
     for (i = 0; i < nFiles; i++) {
         for (j = 0; j < nColumnes; j++) {
             generarCarta(i+1, j+1);
         }
     }
 
+    // Funció que salta quan es fa click sobre alguna de les cartes
     $(".carta").on("click",function(){
         $(this).toggleClass("carta-girada");
     });
 
 });
 
+/**
+ * Funció que barreja les cartes de les mans.
+ * La funció genera un numero aleatori i calcula les posicions de l'array. Amb aquestes mesures reparteix
+ *  aleatoriament les cartes per les posicions de l'array.
+ * @param array[] Mà de cartes
+ */
+function barrejar(array) {
+    let quants = array.length;
+    for(let i=0;i<array.length;i++){
+        let rnd = Math.floor(Math.random()*quants);
+        let aux = array[i];
+        array[i]=array[rnd];
+        array[rnd] = aux;
+    }
+}
+
+/**
+ * Funció que genera cada carta dintre del taulell
+ * @param f Fila iterant
+ * @param c Columna iterant
+ */
 function generarCarta(f, c) {
 
     let cartaID = `f${f}c${c}`;
@@ -45,6 +86,6 @@ function generarCarta(f, c) {
         "top" :  ((f-1)*(alcadaCarta+separacioV)+separacioV)+"px",
         "left"  :  ((c-1)*(ampladaCarta+separacioH)+separacioH)+"px"
     });
+    c%2==0?carta.find(".davant").addClass(barallaMa1.pop()) : carta.find(".davant").addClass(barallaMa2.pop());
     
-    carta.find(".davant").addClass(jocCartes.pop());
 }
