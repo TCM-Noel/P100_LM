@@ -91,8 +91,6 @@ function generarCarta(f, c) {
 
 //CONTROLAR LAS ACCIONES CADA 2 CLICKS
 var contadorClics = 0;
-
-<<<<<<< HEAD
 $(document).ready(function() {
     var contadorClics = 0;
     $(".carta").on("click", function() {
@@ -130,28 +128,4 @@ $(document).ready(function() {
         
         console.log('Dificultad seleccionada:', dificultad);
     }
-=======
-$(".carta").on("click", function() {
-    contadorClics++;
-    if (contadorClics === 2) {
-        
-        //AQUI VAN LES ACCIONS
-        contadorClics = 0;
-    }
-    $(this).toggleClass("carta-girada"); //CON ESTO SE GIRAN LAS CARTAS
-});
-//TEMPORIZADOR
-var tiempoRestante = 100; 
-
-var temporizador = setInterval(function() {//GRACIAS A CHATGPT PARA DECIRME SETINTERVAL
-    tiempoRestante--;
-    document.getElementById("temporitzador").textContent = tiempoRestante;
-    var prueva
-    if (tiempoRestante <= 0) {
-        clearInterval(temporizador);
-        document.getElementById("temporitzador").textContent = "El temps s'ha esgotat";
-        //AQUI PONEMOS LO QUE PASARA SI SE ACABA EL TEMPORIZADOR (EXPLOTA EL JUEGO POSIBLEMENTE)
-    }
-}, 1000); 
->>>>>>> 55e9524 ( "Added click event listener to cards, implemented 2-click action and added timer for the game")
 }
