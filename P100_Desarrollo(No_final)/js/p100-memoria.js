@@ -48,9 +48,39 @@ $(function(){
     }
 
     // Funció que salta quan es fa click sobre alguna de les cartes
-    $(".carta").on("click",function(){
-        $(this).toggleClass("carta-girada");
-    });
+    var contadorClics = 0;
+    var par1, par2;
+$(".carta").on("click", function() {
+    $(this).toggleClass("carta-girada"); //CON ESTO SE GIRAN LAS CARTAS
+    if(contadorClics === 0){
+        par1=$(this);
+    }
+    
+    contadorClics++;
+    console.log(contadorClics);
+    if (contadorClics === 2) {
+        par2 = $(this);
+        // Obtiene las clases de las caras delanteras de las cartas
+        let clasePar1 = par1.find(".davant").attr('class');
+        let clasePar2 = par2.find(".davant").attr('class');
+    
+        if (clasePar1 == clasePar2) {
+            setTimeout(function() {
+                par2.hide();
+                par1.hide();
+            }, 1000); // Retraso de 1 segundo
+        } else {
+            setTimeout(function() {
+                $(par1).toggleClass("carta-girada");
+                $(par2).toggleClass("carta-girada");
+            }, 1000); // Retraso de 1 segundo
+        }
+        contadorClics = 0;
+    }
+    
+    
+    
+});
 
 });
 
@@ -89,3 +119,20 @@ function generarCarta(f, c) {
     c%2==0?carta.find(".davant").addClass(barallaMa1.pop()) : carta.find(".davant").addClass(barallaMa2.pop());
     
 }
+//FUNCION CARTA GIRADA
+
+//TEMPORIZADOR
+/*
+var tiempoRestante = 100; 
+
+var temporizador = setInterval(function() {//GRACIAS A CHATGPT PARA DECIRME SETINTERVAL
+    tiempoRestante--;
+    document.getElementById("temporitzador").textContent = tiempoRestante;
+    var prueva
+    if (tiempoRestante <= 0) {
+        clearInterval(temporizador);
+        document.getElementById("temporitzador").textContent = "El temps s'ha esgotat";
+        //AQUI PONEMOS LO QUE PASARA SI SE ACABA EL TEMPORIZADOR (EXPLOTA EL JUEGO POSIBLEMENTE)
+    }
+}, 1000); 
+*/
