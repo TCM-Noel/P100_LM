@@ -87,5 +87,31 @@ function generarCarta(f, c) {
         "left"  :  ((c-1)*(ampladaCarta+separacioH)+separacioH)+"px"
     });
     c%2==0?carta.find(".davant").addClass(barallaMa1.pop()) : carta.find(".davant").addClass(barallaMa2.pop());
-    
+
+
+//CONTROLAR LAS ACCIONES CADA 2 CLICKS
+var contadorClics = 0;
+
+$(".carta").on("click", function() {
+    contadorClics++;
+    if (contadorClics === 2) {
+        
+        //AQUI VAN LES ACCIONS
+        contadorClics = 0;
+    }
+    $(this).toggleClass("carta-girada"); //CON ESTO SE GIRAN LAS CARTAS
+});
+//TEMPORIZADOR
+var tiempoRestante = 100; 
+
+var temporizador = setInterval(function() {//GRACIAS A CHATGPT PARA DECIRME SETINTERVAL
+    tiempoRestante--;
+    document.getElementById("temporitzador").textContent = tiempoRestante;
+    var prueva
+    if (tiempoRestante <= 0) {
+        clearInterval(temporizador);
+        document.getElementById("temporitzador").textContent = "El temps s'ha esgotat";
+        //AQUI PONEMOS LO QUE PASARA SI SE ACABA EL TEMPORIZADOR (EXPLOTA EL JUEGO POSIBLEMENTE)
+    }
+}, 1000); 
 }
