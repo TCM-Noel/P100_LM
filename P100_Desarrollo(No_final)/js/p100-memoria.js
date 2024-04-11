@@ -1,7 +1,7 @@
 // Variables globals
 var ampladaCarta, alcadaCarta;
 var separacioH=20, separacioV=20;
-var nFiles=4, nColumnes=4;
+var nFiles=2, nColumnes=2;
 
 // Dues mans amb la que es generarà el joc
 var barallaMa1 = [];
@@ -47,41 +47,51 @@ $(function(){
         }
     }
 
+    // FIXME: Comentar correctamente
+
     // Funció que salta quan es fa click sobre alguna de les cartes
     var contadorClics = 0;
     var par1, par2;
-$(".carta").on("click", function() {
-    $(this).toggleClass("carta-girada"); //CON ESTO SE GIRAN LAS CARTAS
-    if(contadorClics === 0){
-        par1=$(this);
-    }
-    
-    contadorClics++;
-    console.log(contadorClics);
-    if (contadorClics === 2) {
-        par2 = $(this);
-        // Obtiene las clases de las caras delanteras de las cartas
-        let clasePar1 = par1.find(".davant").attr('class');
-        let clasePar2 = par2.find(".davant").attr('class');
-    
-        if (clasePar1 == clasePar2) {
-            setTimeout(function() {
-                par2.hide();
-                par1.hide();
-            }, 1000); // Retraso de 1 segundo
-        } else {
-            setTimeout(function() {
-                $(par1).toggleClass("carta-girada");
-                $(par2).toggleClass("carta-girada");
-            }, 1000); // Retraso de 1 segundo
+    $(".carta").on("click", function() {
+        $(this).toggleClass("carta-girada"); //CON ESTO SE GIRAN LAS CARTAS
+        if(contadorClics === 0){
+            par1=$(this);
         }
-        contadorClics = 0;
-    }
-    
-    
-    
-});
+        
+        contadorClics++;
+        console.log(contadorClics);
+        if (contadorClics === 2) {
+            par2 = $(this);
+            // Obtiene las clases de las caras delanteras de las cartas
+            let clasePar1 = par1.find(".davant").attr('class');
+            let clasePar2 = par2.find(".davant").attr('class');
+        
+            if (clasePar1 == clasePar2) {
+                setTimeout(function() {
+                    par2.hide();
+                    par1.hide();
+                }, 1000); // Retraso de 1 segundo
+            } else {
+                setTimeout(function() {
+                    $(par1).toggleClass("carta-girada");
+                    $(par2).toggleClass("carta-girada");
+                }, 1000); // Retraso de 1 segundo
+            }
+            contadorClics = 0;
+        }        
+    });
 
+    // Temporizador
+    var tiempoRestante = 100; 
+    var temporizador = setInterval(function() {
+        tiempoRestante--;
+        $("#temporitzador").text(tiempoRestante);
+        if (tiempoRestante <= 0) {
+            clearInterval(temporizador);
+            $("#temporitzador").text("El temps s'ha esgotat");
+            // Acciones cuando el tiempo se acabe
+        }
+    }, 1000); 
 });
 
 /**
@@ -117,67 +127,23 @@ function generarCarta(f, c) {
         "left"  :  ((c-1)*(ampladaCarta+separacioH)+separacioH)+"px"
     });
     c%2==0?carta.find(".davant").addClass(barallaMa1.pop()) : carta.find(".davant").addClass(barallaMa2.pop());
-<<<<<<< HEAD
+}
+
+/**
+ * Funció que assigna la dificultat del joc
+ * @param dificultad Dificultat del jco
+ */
+function iniciarJuego(dificultad) {
+    // Ocultar menú de dificultad
+    document.getElementById('menu-dificultad').style.display = 'none';
     
+    // Mostrar tablero del juego
+    var tablero = document.getElementById('tablero-juego');
+    tablero.style.display = 'block';
+    
+    // Generar contenido del tablero según la dificultad
+    tablero.innerHTML = '<h2>Dificultad: ' + dificultad + '</h2>';
+    // Aquí puedes expandir la lógica para generar el tablero según la dificultad
+    
+    console.log('Dificultad seleccionada:', dificultad);
 }
-//FUNCION CARTA GIRADA
-
-//TEMPORIZADOR
-/*
-var tiempoRestante = 100; 
-
-var temporizador = setInterval(function() {//GRACIAS A CHATGPT PARA DECIRME SETINTERVAL
-    tiempoRestante--;
-    document.getElementById("temporitzador").textContent = tiempoRestante;
-    var prueva
-    if (tiempoRestante <= 0) {
-        clearInterval(temporizador);
-        document.getElementById("temporitzador").textContent = "El temps s'ha esgotat";
-        //AQUI PONEMOS LO QUE PASARA SI SE ACABA EL TEMPORIZADOR (EXPLOTA EL JUEGO POSIBLEMENTE)
-    }
-}, 1000); 
-*/
-=======
-
-
-//CONTROLAR LAS ACCIONES CADA 2 CLICKS
-var contadorClics = 0;
-$(document).ready(function() {
-    var contadorClics = 0;
-    $(".carta").on("click", function() {
-        contadorClics++;
-        if (contadorClics === 2) {
-            // Acciones cuando se hace clic en dos cartas
-            contadorClics = 0;
-        }
-        $(this).toggleClass("carta-girada"); // Esta clase deberá manejar el efecto de giro en tu CSS
-    });
-
-    // Temporizador
-    var tiempoRestante = 100; 
-    var temporizador = setInterval(function() {
-        tiempoRestante--;
-        $("#temporitzador").text(tiempoRestante);
-        if (tiempoRestante <= 0) {
-            clearInterval(temporizador);
-            $("#temporitzador").text("El temps s'ha esgotat");
-            // Acciones cuando el tiempo se acabe
-        }
-    }, 1000); 
-    })
-    function iniciarJuego(dificultad) {
-        // Ocultar menú de dificultad
-        document.getElementById('menu-dificultad').style.display = 'none';
-        
-        // Mostrar tablero del juego
-        var tablero = document.getElementById('tablero-juego');
-        tablero.style.display = 'block';
-        
-        // Generar contenido del tablero según la dificultad
-        tablero.innerHTML = '<h2>Dificultad: ' + dificultad + '</h2>';
-        // Aquí puedes expandir la lógica para generar el tablero según la dificultad
-        
-        console.log('Dificultad seleccionada:', dificultad);
-    }
-}
->>>>>>> 0095ea5eabc67f9a00df0e0df38ab7a4d4e69d5d
