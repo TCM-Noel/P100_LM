@@ -117,6 +117,7 @@ function generarCarta(f, c) {
         "left"  :  ((c-1)*(ampladaCarta+separacioH)+separacioH)+"px"
     });
     c%2==0?carta.find(".davant").addClass(barallaMa1.pop()) : carta.find(".davant").addClass(barallaMa2.pop());
+<<<<<<< HEAD
     
 }
 //FUNCION CARTA GIRADA
@@ -136,3 +137,47 @@ var temporizador = setInterval(function() {//GRACIAS A CHATGPT PARA DECIRME SETI
     }
 }, 1000); 
 */
+=======
+
+
+//CONTROLAR LAS ACCIONES CADA 2 CLICKS
+var contadorClics = 0;
+$(document).ready(function() {
+    var contadorClics = 0;
+    $(".carta").on("click", function() {
+        contadorClics++;
+        if (contadorClics === 2) {
+            // Acciones cuando se hace clic en dos cartas
+            contadorClics = 0;
+        }
+        $(this).toggleClass("carta-girada"); // Esta clase deberá manejar el efecto de giro en tu CSS
+    });
+
+    // Temporizador
+    var tiempoRestante = 100; 
+    var temporizador = setInterval(function() {
+        tiempoRestante--;
+        $("#temporitzador").text(tiempoRestante);
+        if (tiempoRestante <= 0) {
+            clearInterval(temporizador);
+            $("#temporitzador").text("El temps s'ha esgotat");
+            // Acciones cuando el tiempo se acabe
+        }
+    }, 1000); 
+    })
+    function iniciarJuego(dificultad) {
+        // Ocultar menú de dificultad
+        document.getElementById('menu-dificultad').style.display = 'none';
+        
+        // Mostrar tablero del juego
+        var tablero = document.getElementById('tablero-juego');
+        tablero.style.display = 'block';
+        
+        // Generar contenido del tablero según la dificultad
+        tablero.innerHTML = '<h2>Dificultad: ' + dificultad + '</h2>';
+        // Aquí puedes expandir la lógica para generar el tablero según la dificultad
+        
+        console.log('Dificultad seleccionada:', dificultad);
+    }
+}
+>>>>>>> 0095ea5eabc67f9a00df0e0df38ab7a4d4e69d5d
