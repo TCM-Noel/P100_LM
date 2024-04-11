@@ -8,37 +8,29 @@ var numCartesJugar = 0;
 var maCartesEspanyoles = 52;
 
 // Dues mans amb la que es generarà el joc
-var barallaMa1 = [];
-var barallaMa2 = [];
+var barallaMa = [];
 
+/**
+ * Funció que comproba el resultat de l'input del menú 
+ */
 function comprobarCartes () {
-    numCartesJugar = document.querySelector('#numCartes').value;
-    if (numCartesJugar%2===0) {
-        document.querySelector('#missatgeError').style.display = "none";
+    numCartesJugar = $('#numCartes').val();
+    if (numCartesJugar!="" && numCartesJugar%2===0 && numCartesJugar<=maCartesEspanyoles && numCartesJugar > 0) {
+        $('#missatgeError').css('display', 'none')
+        $('#menuInicial').css('display', 'none')
+        $('#tauler').css('display', 'block')
         iniciaJoc();
     } else {
-        document.querySelector('#missatgeError').style.display = "block";
+        $('#missatgeError').css('display', 'block')
+        $('#tauler').css('display', 'none')
     }
 }
 
+/**
+ * Funció que genera tot el joc
+ */
 function iniciaJoc () {
-    // TODO: Comprobar numero de cartas con las que jugar
-
-    // S'afegeixen totes les cartes a l'array 'barallaMa1'.
-    for(let i = 1; i <= 52; i++){
-        barallaMa1.push('carta' + i);
-    }
-
-    barrejar(barallaMa1); // Es barreja totes les cartes de la mà per tal de poder obtenir cartes aleatories en el joc.
-
-    barallaMa1 = barallaMa1.slice(0,(nFiles*nColumnes)/2); // Crea una copia de l'array original
-                                                           /* Es multiplica el nombre de files i columnes i es divideix entre 2
-                                                              per obtenir el total de cartes amb què es jugarà */
-    barallaMa2 = barallaMa1.slice();
-
-    // Es barrejen les dues mans per tal de obtenir dues mans diferents i així després jugar amb diferents cartes.
-    barrejar(barallaMa1);
-    barrejar(barallaMa2);
+    crearMa();
     
     midesGenerals();
     
@@ -54,13 +46,44 @@ function iniciaJoc () {
     temporitzadorJoc();
 }
 
+/**
+ * Funció que genera la mà i controla el numero de cartes
+ */
 function crearMa () {
-    // S'afegeixen totes les cartes a l'array 'barallaMa1'.
-    for (let i = 1; i <= 52; i++){
-        barallaMa1.push('carta' + i);
+    // S'afegeixen totes les cartes a l'array 'barallaMa'.
+    for(let i = 1; i <= 52; i++){
+        barallaMa.push('carta' + i);
     }
 
+    // FIXME: Arreglar factor más grande divisor
+    nFiles = trobarFactor();
+    nColumnes = numCartesJugar / nFiles;
+
+    barrejar(barallaMa); // Es barreja totes les cartes de la mà per tal de poder obtenir cartes aleatories en el joc.
+    barallaMa = barallaMa.slice(0,(nFiles*nColumnes)/2); // Crea una copia de l'array original
+                                                           /* Es multiplica el nombre de files i columnes i es divideix entre 2
+                                                              per obtenir el total de cartes amb què es jugarà */
     
+    barallaMa.push(...barallaMa) // Duplica los valores del array
+
+    // Es barrejen les dues mans per tal de obtenir dues mans diferents i així després jugar amb diferents cartes.
+    barrejar(barallaMa);
+}
+
+function trobarFactor () {
+
+    /*for (i = 1; i <= numCartesJugar; i++) {
+        
+    }*/
+
+    let factor = 2;
+    while (factor * factor <= numCartesJugar) {
+        if (numCartesJugar % factor === 0) {
+            return factor;
+        }
+        factor++;
+    }
+    return numCartesJugar;
 }
 
 /**
@@ -91,7 +114,7 @@ function midesGenerals () {
  */
 function barrejar(array) {
     let quants = array.length;
-    for(let i=0;i<array.length;i++){
+    for(i=0;i<array.length;i++){
         let rnd = Math.floor(Math.random()*quants);
         let aux = array[i];
         array[i]=array[rnd];
@@ -114,26 +137,7 @@ function generarCarta(f, c) {
         "top" :  ((f-1)*(alcadaCarta+separacioV)+separacioV)+"px",
         "left"  :  ((c-1)*(ampladaCarta+separacioH)+separacioH)+"px"
     });
-    c%2==0?carta.find(".davant").addClass(barallaMa1.pop()) : carta.find(".davant").addClass(barallaMa2.pop());
-}
-
-/**
- * Funció que assigna la dificultat del joc
- * @param dificultad Dificultat del jco
- */
-function iniciarJuego(dificultad) {
-    // Ocultar menú de dificultad
-    document.getElementById('menu-dificultad').style.display = 'none';
-    
-    // Mostrar tablero del juego
-    let tablero = document.getElementById('tablero-juego');
-    tablero.style.display = 'block';
-    
-    // Generar contenido del tablero según la dificultad
-    tablero.innerHTML = '<h2>Dificultad: ' + dificultad + '</h2>';
-    // Aquí puedes expandir la lógica para generar el tablero según la dificultad
-    
-    console.log('Dificultad seleccionada:', dificultad);
+    carta.find(".davant").addClass(barallaMa.pop());
 }
 
 /**
