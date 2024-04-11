@@ -74,7 +74,6 @@ function barrejar(array) {
  * @param c Columna iterant
  */
 function generarCarta(f, c) {
-
     let cartaID = `f${f}c${c}`;
     let cartaHTML = `<div class="carta" id="${cartaID}"><div class="cara darrera"></div><div class="cara davant"></div></div>`;
     $('#tauler').append(cartaHTML);
@@ -96,7 +95,7 @@ function iniciarJuego(dificultad) {
     document.getElementById('menu-dificultad').style.display = 'none';
     
     // Mostrar tablero del juego
-    var tablero = document.getElementById('tablero-juego');
+    let tablero = document.getElementById('tablero-juego');
     tablero.style.display = 'block';
     
     // Generar contenido del tablero según la dificultad
