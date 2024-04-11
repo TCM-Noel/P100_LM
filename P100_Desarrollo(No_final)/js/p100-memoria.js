@@ -2,12 +2,27 @@
 var ampladaCarta, alcadaCarta;
 var separacioH=20, separacioV=20;
 var nFiles=2, nColumnes=2;
+var numCartesJugar = 0;
+
+// Cartes de cada mà
+var maCartesEspanyoles = 52;
 
 // Dues mans amb la que es generarà el joc
 var barallaMa1 = [];
 var barallaMa2 = [];
 
-$(function(){
+function comprobarCartes () {
+    numCartesJugar = document.querySelector('#numCartes').value;
+    if (numCartesJugar%2===0) {
+        document.querySelector('#missatgeError').style.display = "none";
+        iniciaJoc();
+    } else {
+        document.querySelector('#missatgeError').style.display = "block";
+    }
+}
+
+function iniciaJoc () {
+    // TODO: Comprobar numero de cartas con las que jugar
 
     // S'afegeixen totes les cartes a l'array 'barallaMa1'.
     for(let i = 1; i <= 52; i++){
@@ -25,21 +40,8 @@ $(function(){
     barrejar(barallaMa1);
     barrejar(barallaMa2);
     
-    // Càlcul per tal d'ajustar el taulell a la quantitat de cartes a jugar. Mida del tauler:
-        // 2 x 2 => 20
-        // 3 x 3 => 40
-        // 4 x 4 => 60
-    let totalRestarFiles = nFiles != 1 ? 20 * (nFiles - 1) : 0;
-    let totalRestarColumnes = nFiles != 1 ? 20 * (nColumnes - 1) : 0;
-    $("#tauler").css({
-        "width" : `${120 * nColumnes - totalRestarColumnes}px`,
-        "height": `${160 * nFiles - totalRestarFiles}px`
-    });
+    midesGenerals();
     
-    // Agafa les mesures de les cartes
-    ampladaCarta=$(".carta").width(); 
-    alcadaCarta=$(".carta").height();
-
     // Doble iteració per generar les cartes en el taulell
     for (i = 0; i < nFiles; i++) {
         for (j = 0; j < nColumnes; j++) {
@@ -50,7 +52,36 @@ $(function(){
     controlarCartes();
 
     temporitzadorJoc();
-});
+}
+
+function crearMa () {
+    // S'afegeixen totes les cartes a l'array 'barallaMa1'.
+    for (let i = 1; i <= 52; i++){
+        barallaMa1.push('carta' + i);
+    }
+
+    
+}
+
+/**
+ * Funció que controla les mides del taulell de joc i les cartes
+ */
+function midesGenerals () {
+    // Càlcul per tal d'ajustar el taulell a la quantitat de cartes a jugar. Mida del tauler:
+        // 2 x 2 => 20
+        // 3 x 3 => 40
+        // 4 x 4 => 60
+    let totalRestarFiles = nFiles != 1 ? 20 * (nFiles - 1) : 0;
+    let totalRestarColumnes = nFiles != 1 ? 20 * (nColumnes - 1) : 0;
+    $("#tauler").css({
+        "width" : `${120 * nColumnes - totalRestarColumnes}px`,
+        "height": `${160 * nFiles - totalRestarFiles}px`
+    });
+
+    // Agafa les mesures de les cartes
+    ampladaCarta=$(".carta").width(); 
+    alcadaCarta=$(".carta").height();
+}
 
 /**
  * Funció que barreja les cartes de les mans.
