@@ -1,7 +1,7 @@
 // Variables globals
 var ampladaCarta, alcadaCarta;
 var separacioH=20, separacioV=20;
-var nFiles=3, nColumnes=4;
+var nFiles=4, nColumnes=4;
 
 // Dues mans amb la que es generarà el joc
 var barallaMa1 = [];
