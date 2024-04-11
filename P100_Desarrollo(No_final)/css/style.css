@@ -121,6 +121,18 @@ body {
 
 /*...*/
 
+#menu-dificultad {
+    text-align: center;
+    padding: 20px;
+}
+
+#menu-dificultad button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
 /* pokemon */
 /* fila 111 - columna 111 
 .carta1{background-position:    0       0; }

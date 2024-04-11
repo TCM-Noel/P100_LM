@@ -92,26 +92,41 @@ function generarCarta(f, c) {
 //CONTROLAR LAS ACCIONES CADA 2 CLICKS
 var contadorClics = 0;
 
-$(".carta").on("click", function() {
-    contadorClics++;
-    if (contadorClics === 2) {
-        
-        //AQUI VAN LES ACCIONS
-        contadorClics = 0;
-    }
-    $(this).toggleClass("carta-girada"); //CON ESTO SE GIRAN LAS CARTAS
-});
-//TEMPORIZADOR
-var tiempoRestante = 100; 
+$(document).ready(function() {
+    var contadorClics = 0;
+    $(".carta").on("click", function() {
+        contadorClics++;
+        if (contadorClics === 2) {
+            // Acciones cuando se hace clic en dos cartas
+            contadorClics = 0;
+        }
+        $(this).toggleClass("carta-girada"); // Esta clase deberá manejar el efecto de giro en tu CSS
+    });
 
-var temporizador = setInterval(function() {//GRACIAS A CHATGPT PARA DECIRME SETINTERVAL
-    tiempoRestante--;
-    document.getElementById("temporitzador").textContent = tiempoRestante;
-    var prueva
-    if (tiempoRestante <= 0) {
-        clearInterval(temporizador);
-        document.getElementById("temporitzador").textContent = "El temps s'ha esgotat";
-        //AQUI PONEMOS LO QUE PASARA SI SE ACABA EL TEMPORIZADOR (EXPLOTA EL JUEGO POSIBLEMENTE)
+    // Temporizador
+    var tiempoRestante = 100; 
+    var temporizador = setInterval(function() {
+        tiempoRestante--;
+        $("#temporitzador").text(tiempoRestante);
+        if (tiempoRestante <= 0) {
+            clearInterval(temporizador);
+            $("#temporitzador").text("El temps s'ha esgotat");
+            // Acciones cuando el tiempo se acabe
+        }
+    }, 1000); 
+    })
+    function iniciarJuego(dificultad) {
+        // Ocultar menú de dificultad
+        document.getElementById('menu-dificultad').style.display = 'none';
+        
+        // Mostrar tablero del juego
+        var tablero = document.getElementById('tablero-juego');
+        tablero.style.display = 'block';
+        
+        // Generar contenido del tablero según la dificultad
+        tablero.innerHTML = '<h2>Dificultad: ' + dificultad + '</h2>';
+        // Aquí puedes expandir la lógica para generar el tablero según la dificultad
+        
+        console.log('Dificultad seleccionada:', dificultad);
     }
-}, 1000); 
 }
