@@ -57,7 +57,24 @@ body {
 .carta-girada .davant {
     transform: rotate3d(0,1,0,0deg);
 }
-
+.davantP {
+    background: #efefef url(../images/pokemon.jpg);/*cartes DECK*/
+    /*background: #999 url(../images/poker1.png); /*cartes POKER1*/
+    transform: rotate3d(0,1,0,-180deg);
+}
+.cartaP {
+    
+    width: 111px; height: 111px;  /* pokemon */
+   /* width: 79px;	height: 123px;   /* poker1 */
+   
+   position: absolute;
+   -webkit-perspective: 300px; /* Chrome, Safari, Opera  */
+   perspective: 300px;/*transition: all .3s; */
+}
+.darreraP {
+    background: #999 url(../images/pokemon.jpg) 0px -480px; /*cartes DECK*/
+    /*background: #999 url(../images/poker1.png) 0px -496px; /*cartes POKER1*/
+}
 /* deck */
 /* fila 120 - columna 80) */
 .carta1 {background-position: 0 0;}
@@ -121,6 +138,8 @@ body {
 
 /*...*/
 
+
+/*...*/
 #menu-dificultad {
     text-align: center;
     padding: 20px;
@@ -134,15 +153,35 @@ body {
 }
 
 /* pokemon */
-/* fila 111 - columna 111 
-.carta1{background-position:    0       0; }
-.carta2{background-position: -111px     0; }
-.carta3{background-position: -222px     0; }
-.carta4{background-position: -333px     0; }
-.carta5{background-position: -444px     0; }
-.carta6{background-position: -555px     0; }
-.carta7{background-position: -666px     0; }
-.carta8{background-position:   -0    -111px; }
+/* fila 111 - columna 111 */
+.cartaP1{background-position:    0       0; }
+.cartaP2{background-position: -111px     0; }
+.cartaP3{background-position: -222px     0; }
+.cartaP4{background-position: -333px     0; }
+.cartaP5{background-position: -444px     0; }
+.cartaP6{background-position: -555px     0; }
+.cartaP7{background-position: -666px     0; }
+/*.cartaP24{background-position:-777px     0; } /*dorso de la carta*/
+
+/* ... */
+.cartaP9{background-position:    0        -111px; }
+.cartaP10{background-position: -111px     -111px; }
+.cartaP11{background-position: -222px     -111px; }
+.cartaP12{background-position: -333px     -111px; }
+.cartaP13{background-position: -444px     -111px; }
+.cartaP14{background-position: -555px     -111px; }
+.cartaP15{background-position: -666px     -111px; }
+.cartaP16{background-position: -777px     -111px; }
+
+/* ... */
+.cartaP17{background-position:    0       -222px; }
+.cartaP18{background-position: -111px     -222px; }
+.cartaP19{background-position: -222px     -222px; }
+.cartaP20{background-position: -333px     -222x;  }
+.cartaP21{background-position: -444px     -222x;  }
+.cartaP22{background-position: -555px     -222px; }
+.cartaP23{background-position: -666px     -222px; }
+.cartaP8{background-position:  -777px     -222px; }
 
 
 /* poker1 */
