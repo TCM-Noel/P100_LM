@@ -148,6 +148,9 @@ function controlarCartes () {
     let contadorClics = 0;
     let par1, par2;
     $(".carta").on("click", function() {
+        if (contadorClics === 1 && par1[0] === this) {
+            return; // No hacer nada si se hace clic en la misma carta
+        }
         $(this).toggleClass("carta-girada"); //CON ESTO SE GIRAN LAS CARTAS
         if(contadorClics === 0){
             par1=$(this);
