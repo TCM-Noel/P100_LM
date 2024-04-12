@@ -11,15 +11,27 @@
     <h1>Memoria cartes - DEMO</h1>
 </header>
 
-<div id="tauler">
+<div id="menuInicial">
+    <h1>Escriu el numero de cartes amb les que vols jugar (parells)</h1>
+
+    <div id="missatgeError" style="display: none;">
+        <p>Error. Numero de cartes incorrecte</p>
+    </div>
+
+    <input type="number" id="numCartes"/>
+    <br/>
+    <button onclick="comprobarCartes()">Començar el joc</button>
+</div>
+
+<div id="tauler" style="display: none;">
     <div class="carta" style="display: none;"> 
         <div class="cara darrera"></div>
         <div class="cara davant"></div>
     </div>
 </div>
-
-<footer>
+<footer id="footer" style="display: none;">
     <p>Fes clic en una carta per donar-li la volta</p>
 </footer>
+
 </body>
 </html>

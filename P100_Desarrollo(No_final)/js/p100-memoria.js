@@ -18,12 +18,12 @@ function comprobarCartes () {
     if (numCartesJugar!="" && numCartesJugar%2===0 && numCartesJugar<=maCartesEspanyoles && numCartesJugar > 0) {
         $('#missatgeError').css('display', 'none')
         $('#menuInicial').css('display', 'none')
-        $('#footer').css('display', 'none')
+        $('#footer').css('display', 'block')
         $('#tauler').css('display', 'block')
         iniciaJoc();
     } else {
         $('#missatgeError').css('display', 'block')
-        $('#footer').css('display', 'block')
+        $('#footer').css('display', 'none')
         $('#tauler').css('display', 'none')
     }
 }
