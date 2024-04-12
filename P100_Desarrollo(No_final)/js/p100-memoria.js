@@ -14,14 +14,16 @@ var barallaMa = [];
  * Funció que comproba el resultat de l'input del menú 
  */
 function comprobarCartes () {
-    numCartesJugar = $('#numCartes').val();
+    numCartesJugar = parseInt($('#numCartes').val());
     if (numCartesJugar!="" && numCartesJugar%2===0 && numCartesJugar<=maCartesEspanyoles && numCartesJugar > 0) {
         $('#missatgeError').css('display', 'none')
         $('#menuInicial').css('display', 'none')
+        $('#footer').css('display', 'none')
         $('#tauler').css('display', 'block')
         iniciaJoc();
     } else {
         $('#missatgeError').css('display', 'block')
+        $('#footer').css('display', 'block')
         $('#tauler').css('display', 'none')
     }
 }
@@ -35,9 +37,13 @@ function iniciaJoc () {
     midesGenerals();
     
     // Doble iteració per generar les cartes en el taulell
+    let comptadorCartes = 0;
     for (i = 0; i < nFiles; i++) {
         for (j = 0; j < nColumnes; j++) {
-            generarCarta(i+1, j+1);
+            if (comptadorCartes != numCartesJugar) {
+                generarCarta(i+1, j+1);
+                comptadorCartes++;
+            }
         }
     }
 
@@ -55,14 +61,14 @@ function crearMa () {
         barallaMa.push('carta' + i);
     }
 
-    // FIXME: Arreglar factor más grande divisor
-    nFiles = trobarFactor();
-    nColumnes = numCartesJugar / nFiles;
+    // Gestió de columnes i files
+    nColumnes = numCartesJugar === 2 || numCartesJugar === 4 ? 2 : trobarFactor();
+    nFiles = Math.round(numCartesJugar / nColumnes);
 
     barrejar(barallaMa); // Es barreja totes les cartes de la mà per tal de poder obtenir cartes aleatories en el joc.
     barallaMa = barallaMa.slice(0,(nFiles*nColumnes)/2); // Crea una copia de l'array original
-                                                           /* Es multiplica el nombre de files i columnes i es divideix entre 2
-                                                              per obtenir el total de cartes amb què es jugarà */
+                                                         /* Es multiplica el nombre de files i columnes i es divideix entre 2
+                                                            per obtenir el total de cartes amb què es jugarà */
     
     barallaMa.push(...barallaMa) // Duplica los valores del array
 
@@ -70,20 +76,27 @@ function crearMa () {
     barrejar(barallaMa);
 }
 
+/**
+ * Fa un càcul per tal de quadrar correctament les columnes i així tenir una bona distribució del taulell
+ * @returns nColumnes
+ */
 function trobarFactor () {
 
-    /*for (i = 1; i <= numCartesJugar; i++) {
-        
-    }*/
-
-    let factor = 2;
-    while (factor * factor <= numCartesJugar) {
-        if (numCartesJugar % factor === 0) {
-            return factor;
-        }
-        factor++;
+    let divisors = [];
+    for (i = 1; i <= numCartesJugar; i++) {
+        if (numCartesJugar%i === 0 && i !== 1 && i !== numCartesJugar) divisors.push(i);
     }
-    return numCartesJugar;
+    if (divisors.length === 1) {
+        return divisors[0];
+    } else {
+        let divisorGran = divisors[Math.floor(divisors.length / 2)];
+        let divisorPetit = divisors[Math.floor(divisors.length / 2)-1];
+        if (divisorPetit+1 != divisorGran) {
+            let diferencia = (divisorGran - divisorPetit);
+            return divisorGran-(Math.floor(diferencia/2));
+        }
+        return divisorGran;
+    }
 }
 
 /**
