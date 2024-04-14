@@ -110,6 +110,7 @@ input[type="number"] {
     background: #999 url(../images/pokemon.jpg) 0px -480px; /*cartes DECK*/
     /*background: #999 url(../images/poker1.png) 0px -496px; /*cartes POKER1*/
 }
+
 /* deck */
 /* fila 120 - columna 80) */
 .carta1 {background-position: 0 0;}

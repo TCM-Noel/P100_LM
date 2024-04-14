@@ -169,25 +169,23 @@ function controlarCartes () {
             par1=$(this);
         }
         
-        contadorClics++;
-        console.log(contadorClics);
+        contadorClics++; 
         if (contadorClics === 2) {
             par2 = $(this);
             // Obtiene las clases de las caras delanteras de las cartas
             let clasePar1 = par1.find(".davant").attr('class');
             let clasePar2 = par2.find(".davant").attr('class');
         
-            if (clasePar1 == clasePar2) {
-                setTimeout(function() {
+            setTimeout(function() {
+                if (clasePar1 == clasePar2){
                     par2.hide();
                     par1.hide();
-                }, 1000); // Retraso de 1 segundo
-            } else {
-                setTimeout(function() {
+                } else {
                     $(par1).toggleClass("carta-girada");
                     $(par2).toggleClass("carta-girada");
-                }, 1000); // Retraso de 1 segundo
-            }
+                }
+            }, 1000); // Retraso de 1 segundo
+            
             contadorClics = 0;
         }        
     });
