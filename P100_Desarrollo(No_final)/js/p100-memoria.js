@@ -40,7 +40,7 @@ function iniciaJoc () {
     let comptadorCartes = 0;
     for (i = 0; i < nFiles; i++) {
         for (j = 0; j < nColumnes; j++) {
-            if (comptadorCartes != numCartesJugar) {
+            if (comptadorCartes !== numCartesJugar) {
                 generarCarta(i+1, j+1);
                 comptadorCartes++;
             }
