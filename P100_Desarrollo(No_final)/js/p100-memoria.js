@@ -114,8 +114,16 @@ function midesGenerals () {
         // 2 x 2 => 20
         // 3 x 3 => 40
         // 4 x 4 => 60
-    let totalRestarFiles = nFiles != 1 ? 20 * (nFiles - 1) : 0;
-    let totalRestarColumnes = nFiles != 1 ? 20 * (nColumnes - 1) : 0;
+        let totalRestarFiles = 0;
+        let totalRestarColumnes = 0;
+    
+        if (nFiles > 1) {
+            totalRestarFiles = 20 * (nFiles - 1);
+        }
+    
+        if (nColumnes > 1) {
+            totalRestarColumnes = 20 * (nColumnes - 1);
+        }
     $("#tauler").css({
         "width" : `${120 * nColumnes - totalRestarColumnes}px`,
         "height": `${160 * nFiles - totalRestarFiles}px`
