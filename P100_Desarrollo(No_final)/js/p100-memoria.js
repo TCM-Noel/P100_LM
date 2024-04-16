@@ -102,11 +102,17 @@ function trobarFactor () {
         let divisorMigPetit = divisors[Math.floor(divisors.length / 2)-1];
         if (divisorMigPetit+1 != divisorMigGran) {
             let diferencia = (divisorMigGran - divisorMigPetit);
+            console.log("primer return")
+            console.log(divisorMigGran-(Math.floor(diferencia/2)))
             return divisorMigGran-(Math.floor(diferencia/2));
         }
+        console.log("segundo return")
+        console.log(divisorMigGran)
         return divisorMigGran;
     }
 }
+console.log(trobarFactor(16)); // Prueba con 16
+console.log(trobarFactor(36)); // Prueba con 36
 
 /**
  * Funció que controla les mides del taulell de joc i les cartes
