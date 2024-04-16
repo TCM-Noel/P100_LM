@@ -231,3 +231,12 @@ function temporitzadorJoc () {
         }
     }, 1000); 
 }
+//funciones de los sonidos
+function reproducirSonidoMenu() {
+    var audio = document.getElementById("menuSound");
+    audio.play();
+}
+function reproducirSonidotaulell() {
+    var audio = document.getElementById("taulerSound");
+    audio.play();
+}
