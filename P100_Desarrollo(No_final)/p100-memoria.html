@@ -8,16 +8,37 @@
 </head>
 <body>
 <header>
-    <h1>Memoria cartes - DEMO</h1>
+    <table>
+        <tr>
+            <td class="manrope-bold">Joc memory - Fet per: Alex Barroso, Efrén Cayuela i Noel Sariñena</td>
+            <td class="manrope-bold">📊 Marcadors</td>
+        </tr>
+    </table>
 </header>
 
 <div id="menuInicial">
-    <h1>Escriu el numero de cartes amb les que vols jugar (parells)</h1>
 
+    <h3 class="manrope-normal">👋 Benvolgut al memory de la enginyeria informàtica</h3>
+    <h2 class="manrope-normal"> Escull la mà amb la que vols jugar</h2>
     <div>
+        <table id="maTriada">
+            <tr>
+                <td>
+                    <div style="width: 80px; height: 120px; background: url(./images/deck.png) 0px -480px;">
+                </td>
+                <td>
+                    <div style="width: 111px; height: 111px; background: url(./images/pokemon.jpg) -777px 0;"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="manrope-normal">Escull la modalitat de joc o tria les cartes amb les que jugar (numero parell)!</h2>
+
+    <!--<div>
         <button onclick="numCartesDeMa(52)">Deck</button>
         <button onclick="numCartesDeMa(24)">Pokemon</button>
-    </div>
+    </div> -->
 
     <div id="missatgeError" style="display: none;">
         <p>Error. Numero de cartes incorrecte</p>
@@ -34,6 +55,7 @@
         <div class="cara davant"></div>
     </div>
 </div>
+
 <footer id="footer" style="display: none;">
     <p>Fes clic en una carta per donar-li la volta</p>
 </footer>
