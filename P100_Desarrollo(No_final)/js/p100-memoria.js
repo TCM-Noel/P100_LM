@@ -64,7 +64,7 @@ function numCartesDeMa (jugaAmb) {
  */
 function crearMa () {
     // S'afegeixen totes les cartes a l'array 'barallaMa'.
-    for(let i = 1; i <= jugaAmb; i++){
+    for(let i = 1; i <= numCartesMa; i++){
         barallaMa.push('carta' + i);
     }
 
