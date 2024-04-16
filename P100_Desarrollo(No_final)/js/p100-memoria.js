@@ -1,11 +1,9 @@
 // Variables globals
 var ampladaCarta, alcadaCarta;
-var separacioH=20, separacioV=20;
-var nFiles=2, nColumnes=2;
-var numCartesJugar = 0;
-
-// Cartes de cada mà
-var maCartesEspanyoles = 52;
+var separacioH=20, separacioV=20; // Separació entre cartes
+var nFiles=2, nColumnes=2; // Files i columnes
+var numCartesJugar = 0; // Numero que escull l'usuari per jugar cartes
+var numCartesMa = 52; // Mà "deck" per defecte
 
 // Dues mans amb la que es generarà el joc
 var barallaMa = [];
@@ -15,7 +13,7 @@ var barallaMa = [];
  */
 function comprobarCartes () {
     numCartesJugar = parseInt($('#numCartes').val());
-    if (numCartesJugar!="" && numCartesJugar%2===0 && numCartesJugar<=maCartesEspanyoles && numCartesJugar > 0) {
+    if (numCartesJugar!="" && numCartesJugar%2===0 && numCartesJugar<= numCartesMa && numCartesJugar > 0) {
         $('#missatgeError').css('display', 'none')
         $('#menuInicial').css('display', 'none')
         $('#footer').css('display', 'block')
@@ -53,11 +51,20 @@ function iniciaJoc () {
 }
 
 /**
+ * Funció que escolta als botons que trien cada mà
+ * @param jugaAmb Cartes amb les que es juga
+ */
+function numCartesDeMa (jugaAmb) {
+    numCartesMa = jugaAmb;
+    console.log(numCartesMa)
+}
+
+/**
  * Funció que genera la mà i controla el numero de cartes
  */
 function crearMa () {
     // S'afegeixen totes les cartes a l'array 'barallaMa'.
-    for(let i = 1; i <= 52; i++){
+    for(let i = 1; i <= jugaAmb; i++){
         barallaMa.push('carta' + i);
     }
 
@@ -89,13 +96,13 @@ function trobarFactor () {
     if (divisors.length === 1) {
         return divisors[0];
     } else {
-        let divisorGran = divisors[Math.floor(divisors.length / 2)];
-        let divisorPetit = divisors[Math.floor(divisors.length / 2)-1];
-        if (divisorPetit+1 != divisorGran) {
-            let diferencia = (divisorGran - divisorPetit);
-            return divisorGran-(Math.floor(diferencia/2));
+        let divisorMigGran = divisors[Math.floor(divisors.length / 2)];
+        let divisorMigPetit = divisors[Math.floor(divisors.length / 2)-1];
+        if (divisorMigPetit+1 != divisorMigGran) {
+            let diferencia = (divisorMigGran - divisorMigPetit);
+            return divisorMigGran-(Math.floor(diferencia/2));
         }
-        return divisorGran;
+        return divisorMigGran;
     }
 }
 
@@ -147,8 +154,8 @@ function generarCarta(f, c) {
 
     let carta = $(`#${cartaID}`);
     carta.css({
-        "top" :  ((f-1)*(alcadaCarta+separacioV)+separacioV)+"px",
-        "left"  :  ((c-1)*(ampladaCarta+separacioH)+separacioH)+"px"
+        "top"  :  ((f-1)*(alcadaCarta+separacioV)+separacioV)+"px",
+        "left" :  ((c-1)*(ampladaCarta+separacioH)+separacioH)+"px"
     });
     carta.find(".davant").addClass(barallaMa.pop());
 }
@@ -162,9 +169,9 @@ function controlarCartes () {
     let par1, par2;
     $(".carta").on("click", function() {
         if (contadorClics === 1 && par1[0] === this) {
-            return; // No hacer nada si se hace clic en la misma carta
+            return; // No fer res si es fa clic a la mateixa carta.
         }
-        $(this).toggleClass("carta-girada"); //CON ESTO SE GIRAN LAS CARTAS
+        $(this).toggleClass("carta-girada"); // Auqesta funció gira les cartes
         if(contadorClics === 0){
             par1=$(this);
         }
@@ -172,10 +179,12 @@ function controlarCartes () {
         contadorClics++; 
         if (contadorClics === 2) {
             par2 = $(this);
-            // Obtiene las clases de las caras delanteras de las cartas
+            // Obté les classes de les cares davanteres de les cartes
             let clasePar1 = par1.find(".davant").attr('class');
             let clasePar2 = par2.find(".davant").attr('class');
+            $('.carta').addClass('noClick'); // Afegeix la classe noClick 
         
+            // Timeout que comprova les cartes clickades
             setTimeout(function() {
                 if (clasePar1 == clasePar2){
                     par2.hide();
@@ -184,7 +193,8 @@ function controlarCartes () {
                     $(par1).toggleClass("carta-girada");
                     $(par2).toggleClass("carta-girada");
                 }
-            }, 1000); // Retraso de 1 segundo
+                $('.carta').removeClass('noClick'); // Elimina la classe noClick que bloqueja els events
+            }, 1000); // Retard d'un segon
             
             contadorClics = 0;
         }        
