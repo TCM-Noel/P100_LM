@@ -162,6 +162,24 @@ input[type="number"] {
     /*background: #999 url(../images/poker1.png) 0px -496px; /*cartes POKER1*/
 }
 
+.davantE {
+    background: #efefef url(../images/Baraja_española_completa.png);/*cartes DECK*/
+    /*background: #999 url(../images/poker1.png); /*cartes POKER1*/
+    transform: rotate3d(0,1,0,-180deg);
+}
+.cartaE {
+    
+   /* width: 111px; height: 111px;  /* pokemon */
+    width: 79px;	height: 123px;   /* poker1 */
+   
+   position: absolute;
+   -webkit-perspective: 300px; /* Chrome, Safari, Opera  */
+   perspective: 300px;/*transition: all .3s; */
+}
+.darreraE {
+   /* background: #999 url(../images/Baraja_española_completa.png) 0px -480px; /*cartes DECK*/
+    background: #999 url(../images/poker1.png) 0px -496px; /*cartes POKER1*/
+}
 .noClick {
     pointer-events: none;
 }
@@ -251,14 +269,14 @@ input[type="number"] {
 
 
 /* poker1 */
-/* fila 124 - columna 79 
-.carta1{background-position:    0     0  ; }
-.carta2{background-position:  -79px   0  ; }
-.carta3{background-position: -158px   0  ; }
-/*...
-.carta14{background-position:    0    -124px; }
-.carta15{background-position:  -79px  -124px; }
-.carta16{background-position:  -158px -124px; }
+/* fila 124 - columna 79 */
+.cartaE1{background-position:    0     0  ; }
+.cartaE2{background-position:  -79px   0  ; }
+.cartaE3{background-position: -158px   0  ; }
+.cartaE4{background-position:    0    -124px; }
+.cartaE5{background-position:  -79px  -124px; }
+.cartaE6{background-position:  -158px -124px; }
+
 /*...
 .carta39{background-position:    -948px -248px; }
 /*...
