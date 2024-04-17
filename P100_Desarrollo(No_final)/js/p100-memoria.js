@@ -220,16 +220,25 @@ function controlarCartes () {
  */
 function temporitzadorJoc () {
     // Temporizador
-    let tiempoRestante = 100; 
+    let tiempoRestante = 10; 
+    $("#temporitzador").attr("max", tiempoRestante);
     let temporizador = setInterval(function() {
         tiempoRestante--;
-        $("#temporitzador").text(tiempoRestante);
+        console.log(tiempoRestante);
+        $("#temporitzador").attr("value", tiempoRestante);
+        if(tiempoRestante==5){
+            reproducirSonidoPocoTiempo();
+        }
         if (tiempoRestante <= 0) {
             clearInterval(temporizador);
             $("#temporitzador").text("El temps s'ha esgotat");
             // Acciones cuando el tiempo se acabe
         }
     }, 1000); 
+    
+}
+function reproducirSonidoPocTemps(){
+    var audio = document.getElementById("");
 }
 //funciones de los sonidos
 function reproducirSonidoMenu() {
