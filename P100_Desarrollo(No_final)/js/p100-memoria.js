@@ -17,6 +17,8 @@ function comprobarCartes () {
         $('#menuInicial').css('display', 'none')
         $('#footer').css('display', 'block')
         $('#tauler').css('display', 'block')
+        $('#temporitzador').show();
+        reproducirSonidotaulell();
         iniciaJoc();
     } else {
         $('#footer').css('display', 'none')
@@ -29,14 +31,20 @@ function comprobarCartes () {
  * @returns Comprobació si el numero introduit pel jugador
  */
 function comprobarNumCorrecte () {
-    numCartesJugar = parseInt($('#numCartes').val());
+    inp = $('#numCartes');
+    numCartesJugar = parseInt(inp.val());
+    console.log(numCartesJugar);
     if (numCartesJugar!="" && numCartesJugar%2===0 && numCartesJugar<= numCartesMa && numCartesJugar > 0) {
-        $('#numCartes').removeClass('numIncorrecte');
-        console.log('hola')
+        inp.removeClass('numIncorrecte');
         return true;
     } else {
-        $('#numCartes').addClass('numIncorrecte');
-        console.log('hola')
+        if (isNaN(numCartesJugar) || numCartesJugar === 0) {
+            inp.val('');
+            inp.attr('placeholder', 'Introdueix un numero...')
+            inp.removeClass('numIncorrecte');
+        } else {
+            inp.addClass('numIncorrecte');
+        }
         return false;
     }
 }   
@@ -61,7 +69,6 @@ function iniciaJoc () {
     }
 
     controlarCartes();
-    $('#temporitzador').show();
     temporitzadorJoc();
 }
 

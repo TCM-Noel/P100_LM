@@ -55,7 +55,7 @@
                         <button style="width: 100%;" id="facil">
                             <table style="width: 100%;">
                                 <tr>
-                                    <td class="modalitat manrope-bold">Mode fàcil</td>
+                                    <td class="modalitat textModalitat manrope-bold">Mode fàcil</td>
                                     <td class="modalitat manrope-normal">2 x 2</td>
                                     <td class="modalitat manrope-normal" class="fletxa">➡</td>
                                 </tr>
@@ -65,7 +65,7 @@
                         <button style="width: 100%;" id="intermig">
                             <table style="width: 100%;">
                                 <tr>
-                                    <td class="modalitat manrope-bold">Mode intermig</td>
+                                    <td class="modalitat textModalitat manrope-bold">Mode intermig</td>
                                     <td class="modalitat manrope-normal">3 x 3 (8 cartes)</td>
                                     <td class="modalitat manrope-normal" class="fletxa">➡</td>
                                 </tr>
@@ -75,7 +75,7 @@
                         <button style="width: 100%;" id="dificil">
                             <table style="width: 100%;">
                                 <tr>
-                                    <td class="modalitat manrope-bold">Mode difícil</td>
+                                    <td class="modalitat textModalitat manrope-bold">Mode difícil</td>
                                     <td class="modalitat manrope-normal">4 x 4</td>
                                     <td class="modalitat manrope-normal" class="fletxa">➡</td>
                                 </tr>
@@ -87,9 +87,13 @@
                         <h2 class="manrope-normal">
                             <i>O personalitza l'experiència...</i>
                         </h2>
-                        <input type="number" id="numCartes" onkeyup="comprobarNumCorrecte()"/>
+                        <input type="number" 
+                            id="numCartes" 
+                            placeholder="Introdueix un numero..."
+                            onchange="comprobarNumCorrecte()" 
+                            onkeyup="comprobarNumCorrecte()"/>
                         <button
-                            onclick="comprobarCartes(); reproducirSonidotaulell()"
+                            onclick="comprobarCartes()"
                             id="comensarJoc"
                             class="manrope-normal">
                             Començar el joc
