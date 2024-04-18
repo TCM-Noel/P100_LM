@@ -205,11 +205,12 @@ function controlarCartes () {
                 if (clasePar1 == clasePar2){
                     par2.hide();
                     par1.hide();
-                    verificarFinJuego();
+                    
                 } else {
                     $(par1).toggleClass("carta-girada");
                     $(par2).toggleClass("carta-girada");
                 }
+                verificarFinJuego()
                 $('.carta').removeClass('noClick'); // Elimina la classe noClick que bloqueja els events
             }, 1000); // Retard d'un segon
             
@@ -244,6 +245,7 @@ function temporitzadorJoc () {
                  pausarSonidoPocoTiempo();
                  pausarSonidotaulell();
                  senseTemps();
+                 verificarFinJuego()
             }, 1000);
             
             
@@ -253,9 +255,6 @@ function temporitzadorJoc () {
     
     
 }
-
-
-
 
 function senseTemps(){
     var audio = document.getElementById("perdut");
@@ -287,17 +286,22 @@ function reproducirSonidotaulell() {
     var audio = document.getElementById("taulerSound");
     audio.play();
 }
-function verificarFinJuego() {
-    var cartas = $('.carta'); 
-    var todasOcultas = true;
 
-    cartas.each(function() {
+function verificarFinJuego() {
+    var todasOcultas = true;
+    var tiempoRestante = parseInt($("#temporitzador").text()); 
+
+    $(".carta").each(function() {
         if ($(this).css('display') !== 'none') {
             todasOcultas = false;
+            return false; // Sale del bucle si encuentra alguna carta no oculta
         }
     });
 
+    // Verifica si todas las cartas están ocultas o si el tiempo se ha acabado
     if (todasOcultas) {
         alert('¡Felicidades! Has completado el juego.');
+    } else if (tiempoRestante <= 0) {
+        alert('El tiempo ha terminado. ¡Inténtalo de nuevo!');
     }
 }
