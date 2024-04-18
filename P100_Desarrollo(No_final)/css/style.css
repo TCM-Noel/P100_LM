@@ -4,13 +4,11 @@
 
 .manrope-normal {
   font-family: "Manrope", sans-serif;
-  font-style: normal;
 }
 
 .manrope-bold {
     font-family: "Manrope", sans-serif;
     font-weight: 600;
-    font-style: normal;
 }
 
 /** -------------------- ESTILS GENERALS -------------------- */
@@ -91,12 +89,13 @@ button {
     margin: 1px 0 0 0;
 }
 
-button table tr td {
-    width: 33%;
-}
-
 .modalitat {
     font-size: 25px;
+    padding-right: 2rem;
+}
+
+.fletxa {
+    text-align: end;
 }
 
 #facil {

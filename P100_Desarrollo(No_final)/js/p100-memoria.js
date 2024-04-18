@@ -53,12 +53,14 @@ function iniciaJoc () {
 /**
  * Funció que escolta als botons que trien cada mà
  * @param jugaAmb Cartes amb les que es juga
+ * @param carta Passa la carta seleccionada
  */
-function numCartesDeMa (jugaAmb) {
+function numCartesDeMa (jugaAmb, carta) {
     numCartesMa = jugaAmb;
+    $('.maTriadaJoc').css('filter', 'grayscale(90%)')
+    $(carta).css('filter', 'none')
     console.log(numCartesMa)
 }
-
 /**
  * Funció que genera la mà i controla el numero de cartes
  */
