@@ -16,6 +16,9 @@
 #temporitzador {
     width: 90%; /* Ajusta el ancho de la barra de progreso */
     height: 30px; /* Ajusta la altura de la barra de progreso */
+    display: none;
+    
+
 }
 
 body {
