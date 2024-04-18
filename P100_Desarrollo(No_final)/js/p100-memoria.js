@@ -25,7 +25,7 @@ function comprobarCartes () {
 }
 
 /**
- * 
+ * Funció que posa l'input en diferents colors èr
  * @returns Comprobació si el numero introduit pel jugador
  */
 function comprobarNumCorrecte () {
