@@ -203,6 +203,7 @@ function controlarCartes () {
                 if (clasePar1 == clasePar2){
                     par2.hide();
                     par1.hide();
+                    verificarFinJuego();
                 } else {
                     $(par1).toggleClass("carta-girada");
                     $(par2).toggleClass("carta-girada");
@@ -239,4 +240,18 @@ function reproducirSonidoMenu() {
 function reproducirSonidotaulell() {
     var audio = document.getElementById("taulerSound");
     audio.play();
+}
+function verificarFinJuego() {
+    var cartas = $('.carta'); 
+    var todasOcultas = true;
+
+    cartas.each(function() {
+        if ($(this).css('display') !== 'none') {
+            todasOcultas = false;
+        }
+    });
+
+    if (todasOcultas) {
+        alert('¡Felicidades! Has completado el juego.');
+    }
 }
