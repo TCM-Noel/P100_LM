@@ -95,6 +95,11 @@ button {
 
 .fletxa {
     text-align: end;
+    padding-right: 10px;
+    font-size: 28px;
+    color: rgb(232, 232, 232);
+    -webkit-text-stroke-width: 0.5px;
+    -webkit-text-stroke-color: black;
 }
 
 #facil {
@@ -124,6 +129,7 @@ input[type="number"] {
 
 #comensarJoc {
     border-radius: 20px;    
+    border: 0.1px solid black;
     padding: 0.8rem;
     background-color: #cafec5;
     font-size: 18px;
