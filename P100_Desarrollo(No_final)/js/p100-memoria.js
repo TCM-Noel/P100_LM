@@ -17,6 +17,8 @@ function comprobarCartes () {
         $('#menuInicial').css('display', 'none')
         $('#footer').css('display', 'block')
         $('#tauler').css('display', 'block')
+        $('#temporitzador').show();
+        reproducirSonidotaulell();
         iniciaJoc();
     } else {
         $('#footer').css('display', 'none')
@@ -29,14 +31,20 @@ function comprobarCartes () {
  * @returns Comprobació si el numero introduit pel jugador
  */
 function comprobarNumCorrecte () {
-    numCartesJugar = parseInt($('#numCartes').val());
+    inp = $('#numCartes');
+    numCartesJugar = parseInt(inp.val());
+    console.log(numCartesJugar);
     if (numCartesJugar!="" && numCartesJugar%2===0 && numCartesJugar<= numCartesMa && numCartesJugar > 0) {
-        $('#numCartes').removeClass('numIncorrecte');
-        console.log('hola')
+        inp.removeClass('numIncorrecte');
         return true;
     } else {
-        $('#numCartes').addClass('numIncorrecte');
-        console.log('hola')
+        if (isNaN(numCartesJugar) || numCartesJugar === 0) {
+            inp.val('');
+            inp.attr('placeholder', 'Introdueix un numero...')
+            inp.removeClass('numIncorrecte');
+        } else {
+            inp.addClass('numIncorrecte');
+        }
         return false;
     }
 }   
@@ -61,7 +69,6 @@ function iniciaJoc () {
     }
 
     controlarCartes();
-    $('#temporitzador').show();
     temporitzadorJoc();
 }
 
@@ -276,33 +283,33 @@ function tornarAlMenu(){
     location.href="p100-memoria.html";
 }
 function senseTemps(){
-    var audio = document.getElementById("perdut");
+    let audio = document.getElementById("perdut");
     audio.play();
     alert('Ja no tens més temps!');
     tornarAlMenu();
 }
 function pausarSonidoPocoTiempo(){
-    var audio = document.getElementById("PocTemps");
+    let audio = document.getElementById("PocTemps");
     audio.pause();
 }
 function pausarSonidoMenu() {
-    var audio = document.getElementById("menuSound");
+    let audio = document.getElementById("menuSound");
     audio.pause();
 }
 function pausarSonidotaulell() {
-    var audio = document.getElementById("taulerSound");
+    let audio = document.getElementById("taulerSound");
     audio.pause();
 }
 function reproducirSonidoPocoTiempo(){
-    var audio = document.getElementById("PocTemps");
+    let audio = document.getElementById("PocTemps");
     audio.play();
 }
 function reproducirSonidoMenu() {
-    var audio = document.getElementById("menuSound");
+    let audio = document.getElementById("menuSound");
     audio.play();
 }
 function reproducirSonidotaulell() {
-    var audio = document.getElementById("taulerSound");
+    let audio = document.getElementById("taulerSound");
     audio.play();
 }
 
@@ -310,8 +317,9 @@ function reproducirSonidotaulell() {
  * Funció que finalitza el joc
  */
 function verificarFinJuego() {
-    var cartas = $('.carta'); 
-    var todasOcultas = true;
+    let cartas = $('.carta'); 
+    let todasOcultas = true;
+    let tiempoRestante = parseInt($("#temporizador").text()); // Asumiendo que el temporizador está en un elemento con id 'temporizador'
 
     cartas.each(function() {
         if ($(this).css('display') !== 'none') {

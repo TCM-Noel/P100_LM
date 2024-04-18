@@ -89,6 +89,9 @@ button {
     padding-right: 2rem;
 }
 
+.textModalitat {
+    width: 40%;
+}
 
 .fletxa {
     text-align: end;
@@ -110,12 +113,12 @@ input[type="number"] {
     padding: 0.8rem;
     font-size: 18px;
     text-align: center;
-    width: 7rem;
+    width: 15rem;
     transition: .2s ease-in-out;
 }
 
 .numIncorrecte {
-    background-color: rgb(241, 214, 214);
+    background-color: rgb(255, 113, 113);
     transition: .2s;
 }
 

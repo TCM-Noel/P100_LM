@@ -19,8 +19,7 @@
         </header>
 
         <div id="menuInicial">
-            <h3 class="manrope-normal">👋 Benvolgut al memory de la enginyeria
-                informàtica</h3>
+            <h3 class="manrope-normal">👋 Benvolgut al memory de la enginyeria informàtica</h3>
 
             <table style="width: 100%; margin: 0 auto;">
                 <!-- COLUMNES DEL MENU-->
@@ -28,9 +27,9 @@
                     <td class="columnesMenu"
                         style="width: 50%; border-right: 1px solid black;">
                         <!-- COLUMNA 1 -->
-                        <h2 class="manrope-normal"
-                            style="text-align: center;"><i>Escull la mà amb la
-                                que vols jugar</i></h2>
+                        <h2 class="manrope-normal" style="text-align: center;">
+                            <i>Escull la mà amb la que vols jugar</i>
+                        </h2>
                         <table id="maTriada">
                             <tr>
                                 <td>
@@ -52,17 +51,13 @@
                     </td>
                     <td class="columnesMenu" style="width: 50%;">
                         <!-- COLUMNA 2 -->
-                        <h2 class="manrope-normal"><i>Escull la modalitat de
-                                joc!</i></h2>
+                        <h2 class="manrope-normal"><i>Escull la modalitat de joc!</i></h2>
                         <button style="width: 100%;" id="facil">
                             <table style="width: 100%;">
                                 <tr>
-                                    <td class="modalitat manrope-bold">Mode
-                                        fàcil</td>
-                                    <td class="modalitat manrope-normal">2 x
-                                        2</td>
-                                    <td class="modalitat manrope-normal"
-                                        class="fletxa">➡</td>
+                                    <td class="modalitat textModalitat manrope-bold">Mode fàcil</td>
+                                    <td class="modalitat manrope-normal">2 x 2</td>
+                                    <td class="modalitat manrope-normal" class="fletxa">➡</td>
                                 </tr>
                             </table>
                         </button>
@@ -70,12 +65,9 @@
                         <button style="width: 100%;" id="intermig">
                             <table style="width: 100%;">
                                 <tr>
-                                    <td class="modalitat manrope-bold">Mode
-                                        intermig</td>
-                                    <td class="modalitat manrope-normal">3 x 3
-                                        (8 cartes)</td>
-                                    <td class="modalitat manrope-normal"
-                                        class="fletxa">➡</td>
+                                    <td class="modalitat textModalitat manrope-bold">Mode intermig</td>
+                                    <td class="modalitat manrope-normal">3 x 3 (8 cartes)</td>
+                                    <td class="modalitat manrope-normal" class="fletxa">➡</td>
                                 </tr>
                             </table>
                         </button>
@@ -83,23 +75,25 @@
                         <button style="width: 100%;" id="dificil">
                             <table style="width: 100%;">
                                 <tr>
-                                    <td class="modalitat manrope-bold">Mode
-                                        difícil</td>
-                                    <td class="modalitat manrope-normal">4 x
-                                        4</td>
-                                    <td class="modalitat manrope-normal"
-                                        class="fletxa">➡</td>
+                                    <td class="modalitat textModalitat manrope-bold">Mode difícil</td>
+                                    <td class="modalitat manrope-normal">4 x 4</td>
+                                    <td class="modalitat manrope-normal" class="fletxa">➡</td>
                                 </tr>
                             </table>
                         </button>
                         <!--<div id="missatgeError" style="display: none;">
                             <p>Error. Numero de cartes incorrecte</p>
                         </div>-->
-                        <h2 class="manrope-normal"><i>O personalitza
-                                l'experiència...</i></h2>
-                        <input type="number" id="numCartes" onkeyup="comprobarNumCorrecte()"/>
+                        <h2 class="manrope-normal">
+                            <i>O personalitza l'experiència...</i>
+                        </h2>
+                        <input type="number" 
+                            id="numCartes" 
+                            placeholder="Introdueix un numero..."
+                            onchange="comprobarNumCorrecte()" 
+                            onkeyup="comprobarNumCorrecte()"/>
                         <button
-                            onclick="comprobarCartes(); reproducirSonidotaulell()"
+                            onclick="comprobarCartes()"
                             id="comensarJoc"
                             class="manrope-normal">
                             Començar el joc
