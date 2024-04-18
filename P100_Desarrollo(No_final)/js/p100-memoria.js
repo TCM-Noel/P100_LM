@@ -321,8 +321,6 @@ function reproducirSonidotaulell() {
 function verificarFinJuego() {
     let cartas = $('.carta'); 
     let todasOcultas = true;
-    let tiempoRestante = parseInt($("#temporizador").text()); // Asumiendo que el temporizador está en un elemento con id 'temporizador'
-
     cartas.each(function() {
         if ($(this).css('display') !== 'none') {
             todasOcultas = false;
@@ -330,7 +328,7 @@ function verificarFinJuego() {
     });
 
     if (todasOcultas) {
-        guanyat =true;
+        guanyat = true;
         alert('¡Felicidades! Has completado el juego.');
         tornarAlMenu();
     }
