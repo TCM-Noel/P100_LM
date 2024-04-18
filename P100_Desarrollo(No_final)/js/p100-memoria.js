@@ -269,6 +269,7 @@ function temporitzadorJoc () {
                      pausarSonidoPocoTiempo();
                      pausarSonidotaulell();
                      senseTemps();
+                     verificarFinJuego(true);
                 }, 1000);
             }    
         }
@@ -318,7 +319,7 @@ function reproducirSonidotaulell() {
 /**
  * Funció que finalitza el joc
  */
-function verificarFinJuego() {
+function verificarFinJuego(tiempoAgotado = false) {
     let cartas = $('.carta'); 
     let todasOcultas = true;
     cartas.each(function() {
@@ -330,6 +331,10 @@ function verificarFinJuego() {
     if (todasOcultas) {
         guanyat = true;
         alert('¡Felicidades! Has completado el juego.');
+        tornarAlMenu();
+    } else if (tiempoAgotado) {
+        guanyat = false;
+        alert('¡Tiempo agotado! Has perdido.');
         tornarAlMenu();
     }
 }
