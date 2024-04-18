@@ -1,5 +1,4 @@
 // Variables globals
-var ampladaCarta, alcadaCarta;
 var separacioH=20, separacioV=20; // Separació entre cartes
 var nFiles=2, nColumnes=2; // Files i columnes
 var numCartesJugar = 0; // Numero que escull l'usuari per jugar cartes
@@ -7,13 +6,26 @@ var numCartesMa = 52; // Mà "deck" per defecte
 var guanyat=false;
 
 // Mà amb la que es genera el joc
+var ampladaCarta = 80, alcadaCarta = 120; // Se li assigna l'alçada i l'amplada del taulell dinàmicament
 var barallaMa = [];
+var maTriada = 'carta';
+var maDavant = 'davant';
+var maDarrera = 'darrera';
+var cartaWidth = 120;
+var cartaHeigh = 160;
 
 /**
- * Funció que comproba el resultat de l'input del menú 
+ * Funció que executa el joc segons les dues modalitats en les que es pot iniciar:
+ *      - Si es prem un botó de mode, entra directament al joc
+ *      - Si tria el numero de cartes, es verifica que siguin correctes i inicia el joc
  */
-function comprobarCartes () {
-    let comprobacio = comprobarNumCorrecte();
+function comprobarCartes (numCartes) {
+    if (numCartes !== 0) {
+        numCartesJugar = numCartes;
+        comprobacio = true;
+    } else {
+        comprobacio = comprobarNumCorrecte();
+    }
     if (comprobacio) {
         $('#menuInicial').css('display', 'none')
         $('#footer').css('display', 'block')
@@ -34,7 +46,6 @@ function comprobarCartes () {
 function comprobarNumCorrecte () {
     inp = $('#numCartes');
     numCartesJugar = parseInt(inp.val());
-    console.log(numCartesJugar);
     if (numCartesJugar!="" && numCartesJugar%2===0 && numCartesJugar<= numCartesMa && numCartesJugar > 0) {
         inp.removeClass('numIncorrecte');
         return true;
@@ -79,19 +90,38 @@ function iniciaJoc () {
  * @param jugaAmb Cartes amb les que es juga
  * @param carta Passa la carta seleccionada
  */
-function numCartesDeMa (jugaAmb, carta) {
+function numCartesDeMa (jugaAmb, carta, maTriadaHTML, maDavantHTML, maDarreraHTML) {
     numCartesMa = jugaAmb;
     $('.maTriadaJoc').css('filter', 'grayscale(90%)')
     $(carta).css('filter', 'none')
-    console.log(numCartesMa)
+    maTriada = maTriadaHTML;
+    maDavant = maDavantHTML;
+    maDarrera = maDarreraHTML;
+    if (maTriada == 'carta') {
+        cartaWidth = 120;
+        cartaHeigh = 160;
+        ampladaCarta = 80;
+        alcadaCarta = 120;
+    } else if (maTriada == 'cartaP') {
+        cartaWidth = 151;
+        cartaHeigh = 151;
+        ampladaCarta = 111;
+        alcadaCarta = 111;
+    } else {
+        cartaWidth = 0; // Emplenar
+        cartaHeigh = 0; // Emplenar
+        ampladaCarta = 0; // Emplenar
+        alcadaCarta = 0; // Emplenar
+    }
 }
 /**
  * Funció que genera la mà i controla el numero de cartes
  */
 function crearMa () {
     // S'afegeixen totes les cartes a l'array 'barallaMa'.
+    console.log(maTriada)
     for(let i = 1; i <= numCartesMa; i++){
-        barallaMa.push('carta' + i);
+        barallaMa.push(maTriada + i);
     }
 
     // Gestió de columnes i files
@@ -146,24 +176,22 @@ function midesGenerals () {
         // 2 x 2 => 20
         // 3 x 3 => 40
         // 4 x 4 => 60
-        let totalRestarFiles = 0;
-        let totalRestarColumnes = 0;
-    
-        if (nFiles > 1) {
-            totalRestarFiles = 20 * (nFiles - 1);
-        }
-    
-        if (nColumnes > 1) {
-            totalRestarColumnes = 20 * (nColumnes - 1);
-        }
+    let totalRestarFiles = 0;
+    let totalRestarColumnes = 0;
+
+    if (nFiles > 1) {
+        totalRestarFiles = 20 * (nFiles - 1);
+    }
+
+    if (nColumnes > 1) {
+        totalRestarColumnes = 20 * (nColumnes - 1);
+    }
+
     $("#tauler").css({
-        "width" : `${120 * nColumnes - totalRestarColumnes}px`,
-        "height": `${160 * nFiles - totalRestarFiles}px`
+        "width" : `${cartaWidth * nColumnes - totalRestarColumnes}px`,
+        "height": `${cartaHeigh * nFiles - totalRestarFiles}px`
     });
 
-    // Agafa les mesures de les cartes
-    ampladaCarta=$(".carta").width(); 
-    alcadaCarta=$(".carta").height();
 }
 
 /**
@@ -189,7 +217,7 @@ function barrejar(array) {
  */
 function generarCarta(f, c) {
     let cartaID = `f${f}c${c}`;
-    let cartaHTML = `<div class="carta" id="${cartaID}"><div class="cara darrera"></div><div class="cara davant"></div></div>`;
+    let cartaHTML = `<div class="${maTriada}" id="${cartaID}"><div class="cara ${maDarrera}"></div><div class="cara ${maDavant}"></div></div>`;
     $('#tauler').append(cartaHTML);
 
     let carta = $(`#${cartaID}`);
@@ -197,7 +225,7 @@ function generarCarta(f, c) {
         "top"  :  ((f-1)*(alcadaCarta+separacioV)+separacioV)+"px",
         "left" :  ((c-1)*(ampladaCarta+separacioH)+separacioH)+"px"
     });
-    carta.find(".davant").addClass(barallaMa.pop());
+    carta.find(`.${maDavant}`).addClass(barallaMa.pop());
 }
 
 /**
@@ -207,7 +235,8 @@ function controlarCartes () {
     // Funció que salta quan es fa click sobre alguna de les cartes
     let contadorClics = 0;
     let par1, par2;
-    $(".carta").on("click", function() {
+    $(`.${maTriada}`).on("click", function() {
+        console.log(`.${maTriada}`);
         if (contadorClics === 1 && par1[0] === this) {
             return; // No fer res si es fa clic a la mateixa carta.
         }
@@ -220,9 +249,9 @@ function controlarCartes () {
         if (contadorClics === 2) {
             par2 = $(this);
             // Obté les classes de les cares davanteres de les cartes
-            let clasePar1 = par1.find(".davant").attr('class');
-            let clasePar2 = par2.find(".davant").attr('class');
-            $('.carta').addClass('noClick'); // Afegeix la classe noClick 
+            let clasePar1 = par1.find(`.${maDavant}`).attr('class');
+            let clasePar2 = par2.find(`.${maDavant}`).attr('class');
+            $(`.${maTriada}`).addClass('noClick'); // Afegeix la classe noClick 
         
             // Timeout que comprova les cartes clickades
             setTimeout(function() {
@@ -234,7 +263,7 @@ function controlarCartes () {
                     $(par1).toggleClass("carta-girada");
                     $(par2).toggleClass("carta-girada");
                 }
-                $('.carta').removeClass('noClick'); // Elimina la classe noClick que bloqueja els events
+                $(`.${maTriada}`).removeClass('noClick'); // Elimina la classe noClick que bloqueja els events
             }, 1000); // Retard d'un segon
             
             contadorClics = 0;
@@ -254,7 +283,6 @@ function temporitzadorJoc () {
     let temporizador = setInterval(function() {
         if(!guanyat){
             tiempoRestante--;
-            console.log(tiempoRestante);
             //$("#temporitzador").attr("value", tiempoRestante);
             $("#temporitzador").animate({ value: tiempoRestante }, 1000);
             if(tiempoRestante<=5){
@@ -265,7 +293,7 @@ function temporitzadorJoc () {
                 setTimeout(function() {
                     $("#temporitzador").text("El temps s'ha esgotat");
                      // Acciones cuando el tiempo se acabe
-                     $('.carta').hide();
+                     $(`.${maTriada}`).hide();
                      pausarSonidoPocoTiempo();
                      pausarSonidotaulell();
                      senseTemps();
@@ -319,7 +347,7 @@ function reproducirSonidotaulell() {
  * Funció que finalitza el joc
  */
 function verificarFinJuego() {
-    let cartas = $('.carta'); 
+    let cartas = $(`.${maTriada}`); 
     let todasOcultas = true;
     let tiempoRestante = parseInt($("#temporizador").text()); // Asumiendo que el temporizador está en un elemento con id 'temporizador'
 

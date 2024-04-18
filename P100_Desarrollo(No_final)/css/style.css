@@ -119,7 +119,8 @@ input[type="number"] {
     font-size: 18px;
     text-align: center;
     width: 15rem;
-    transition: .2s ease-in-out;
+    transition: ease-in-out .2s;
+    border-radius: 20px 0 0 20px;
 }
 
 .numIncorrecte {
@@ -128,11 +129,11 @@ input[type="number"] {
 }
 
 #comensarJoc {
-    border-radius: 20px;    
+    border-radius: 0 20px 20px 0;    
     border: 0.1px solid black;
     padding: 0.8rem;
     background-color: #cafec5;
-    font-size: 18px;
+    font-size: 17px;
 } 
 
 /** -------------------- ESTILS DEL JOC -------------------- */
@@ -147,89 +148,92 @@ input[type="number"] {
     box-shadow: 0 -1px 0 #999, 0 1px 0 #999, inset 0;
 }
 
-.carta {
-    width: 80px;	height: 120px;   /* deck */
-    /* width: 111px; height: 111px;  /* pokemon */
-    /* width: 79px;	height: 123px;   /* poker1 */
-    
-    position: absolute;
-    -webkit-perspective: 300px; /* Chrome, Safari, Opera  */
-    perspective: 300px;/*transition: all .3s; */
-}
-
-.carta:hover .cara{
-    box-shadow: 0 0 10px #aaa;
-}
-
 .cara {
     border-radius: 10px;
     width: 100%;	height: 100%;
     position: absolute;  /* per poder moure la carta */
 
     transition-property: transform, shadow;
-    transition-duration: .5s;
+    transition-duration: .4s;
 
     backface-visibility: hidden;
 }
 
-.darrera {
-    background: #999 url(../images/deck.png) 0px -480px; /*cartes DECK*/
-    /*background: #999 url(../images/poker1.png) 0px -496px; /*cartes POKER1*/
+.carta:hover .cara{
+    box-shadow: 0 0 10px #aaa;
 }
 
-.davant {
-    background: #efefef url(../images/deck.png);/*cartes DECK*/
-    /*background: #999 url(../images/poker1.png); /*cartes POKER1*/
-    transform: rotate3d(0,1,0,-180deg);
-}
-
-
-.carta-girada .darrera {
+.carta-girada .darrera,
+.carta-girada .darreraP,
+.carta-girada .darreraE {
     transform: rotate3d(0,1,0,180deg);
 }
 
-.carta-girada .davant {
+.carta-girada .davant,
+.carta-girada .davantP,
+.carta-girada .davantE {
     transform: rotate3d(0,1,0,0deg);
 }
-.davantP {
-    background: #efefef url(../images/pokemon.jpg);/*cartes DECK*/
-    /*background: #999 url(../images/poker1.png); /*cartes POKER1*/
-    transform: rotate3d(0,1,0,-180deg);
-}
-.cartaP {
-    
-    width: 111px; height: 111px;  /* pokemon */
-   /* width: 79px;	height: 123px;   /* poker1 */
-   
-   position: absolute;
-   -webkit-perspective: 300px; /* Chrome, Safari, Opera  */
-   perspective: 300px;/*transition: all .3s; */
-}
-.darreraP {
-    background: #999 url(../images/pokemon.jpg) 0px -480px; /*cartes DECK*/
-    /*background: #999 url(../images/poker1.png) 0px -496px; /*cartes POKER1*/
-}
 
-.davantE {
-    background: #efefef url(../images/Baraja_española_completa.png);/*cartes DECK*/
-    /*background: #999 url(../images/poker1.png); /*cartes POKER1*/
-    transform: rotate3d(0,1,0,-180deg);
-}
-.cartaE {
-    
-   /* width: 111px; height: 111px;  /* pokemon */
-    width: 79px;	height: 123px;   /* poker1 */
-   
-   position: absolute;
-   -webkit-perspective: 300px; /* Chrome, Safari, Opera  */
-   perspective: 300px;/*transition: all .3s; */
-}
-.darreraE {
-   /* background: #999 url(../images/Baraja_española_completa.png) 0px -480px; /*cartes DECK*/
-    background: #999 url(../images/poker1.png) 0px -496px; /*cartes POKER1*/
-}
 .noClick {
     pointer-events: none;
+}
+
+/** ---- DECK ---- */
+
+.carta {
+    width: 80px;	height: 120px;
+    
+    position: absolute;
+    -webkit-perspective: 300px; /* Chrome, Safari, Opera  */
+    perspective: 300px;/*transition: all .3s; */
+}
+
+.davant {
+    background: #efefef url(../images/deck.png);
+    transform: rotate3d(0,1,0,-180deg);
+}
+
+.darrera {
+    background: #999 url(../images/deck.png) 0px -480px;
+}
+
+/** ---- POKEMON ---- */
+
+.cartaP {
+    width: 111px; height: 111px;  /* pokemon */
+   
+   position: absolute;
+   -webkit-perspective: 300px; /* Chrome, Safari, Opera  */
+   perspective: 300px;/*transition: all .3s; */
+}
+
+.davantP {
+    background: #efefef url(../images/pokemon.jpg);
+    transform: rotate3d(0,1,0,-180deg);
+}
+
+.darreraP {
+    background: #999 url(../images/pokemon.jpg) -777px 0;
+}
+
+/** ---- POKER ---- */
+
+.cartaE {
+    width: 79px;	height: 123px; 
+    
+    position: absolute;
+    -webkit-perspective: 300px; /* Chrome, Safari, Opera  */
+    perspective: 300px;/*transition: all .3s; */
+ }
+
+.davantE {
+    background: #efefef url(../images/Baraja_española_completa.png);
+    transform: rotate3d(0,1,0,-180deg);
+}
+
+.darreraE {
+    background: #999 url(../images/poker1.png) 0px -496px; 
 }
 
 /* deck */

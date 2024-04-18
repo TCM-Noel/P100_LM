@@ -20,7 +20,6 @@
 
         <div id="menuInicial">
             <h3 class="manrope-normal">👋 Benvolgut al memory de la enginyeria informàtica</h3>
-
             <table style="width: 100%; margin: 0 auto;">
                 <!-- COLUMNES DEL MENU-->
                 <tr>
@@ -35,14 +34,15 @@
                                 <td>
                                     <div
                                         class="maTriadaJoc"
-                                        onclick="numCartesDeMa(52, this)"
+                                        onclick="numCartesDeMa(52, this, 'carta', 'davant', 'darrera')"
                                         style="width: 80px; height: 120px; background: url(./images/deck.png) 0px -480px; scale: 1.3; filter: none;">
+                                        
                                     </div>
                                 </td>
                                 <td>
                                     <div
                                         class="maTriadaJoc"
-                                        onclick="numCartesDeMa(24, this)"
+                                        onclick="numCartesDeMa(24, this, 'cartaP', 'davantP', 'darreraP')"
                                         style="width: 111px; height: 111px; background: url(./images/pokemon.jpg) -777px 0; scale: 1.3;">
                                     </div>
                                 </td>
@@ -52,7 +52,7 @@
                     <td class="columnesMenu" style="width: 50%;">
                         <!-- COLUMNA 2 -->
                         <h2 class="manrope-normal"><i>Escull la modalitat de joc!</i></h2>
-                        <button style="width: 100%;" id="facil">
+                        <button style="width: 100%;" id="facil" onclick="comprobarCartes(4);">
                             <table style="width: 100%;">
                                 <tr>
                                     <td class="modalitat textModalitat manrope-bold">Mode fàcil</td>
@@ -62,7 +62,7 @@
                             </table>
                         </button>
                         <br>
-                        <button style="width: 100%;" id="intermig">
+                        <button style="width: 100%;" id="intermig" onclick="comprobarCartes(8);">
                             <table style="width: 100%;">
                                 <tr>
                                     <td class="modalitat textModalitat manrope-bold">Mode intermig</td>
@@ -72,7 +72,7 @@
                             </table>
                         </button>
                         <br>
-                        <button style="width: 100%;" id="dificil">
+                        <button style="width: 100%;" id="dificil" onclick="comprobarCartes(16);">
                             <table style="width: 100%;">
                                 <tr>
                                     <td class="modalitat textModalitat manrope-bold">Mode difícil</td>
@@ -81,9 +81,6 @@
                                 </tr>
                             </table>
                         </button>
-                        <!--<div id="missatgeError" style="display: none;">
-                            <p>Error. Numero de cartes incorrecte</p>
-                        </div>-->
                         <h2 class="manrope-normal">
                             <i>O personalitza l'experiència...</i>
                         </h2>
@@ -93,7 +90,7 @@
                             onchange="comprobarNumCorrecte()" 
                             onkeyup="comprobarNumCorrecte()"/>
                         <button
-                            onclick="comprobarCartes()"
+                            onclick="comprobarCartes(0)"
                             id="comensarJoc"
                             class="manrope-normal">
                             Començar el joc
@@ -118,10 +115,10 @@
             <div id="tauler" style="display: none;">
                 <audio id="perdut"
                     src="media/clash-royale-king-cry.mp3"></audio>
-                <div class="carta" style="display: none;">
-                    <div class="cara darrera"></div>
-                    <div class="cara davant"></div>
-                </div>
+                    <div class="carta" style="display: none;">
+                        <div class="cara darrera"></div>
+                        <div class="cara davant"></div>
+                    </div>
                 <audio id="menuSound"
                     src="media/Elevator Music (Kevin MacLeod) - Gaming Background Music (HD).mp3"></audio>
             </div>
