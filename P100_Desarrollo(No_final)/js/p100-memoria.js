@@ -277,31 +277,31 @@ function temporitzadorJoc () {
  * Funcions de so
  */
 function senseTemps(){
-    var audio = document.getElementById("perdut");
+    let audio = document.getElementById("perdut");
     audio.play();
 }
 function pausarSonidoPocoTiempo(){
-    var audio = document.getElementById("PocTemps");
+    let audio = document.getElementById("PocTemps");
     audio.pause();
 }
 function pausarSonidoMenu() {
-    var audio = document.getElementById("menuSound");
+    let audio = document.getElementById("menuSound");
     audio.pause();
 }
 function pausarSonidotaulell() {
-    var audio = document.getElementById("taulerSound");
+    let audio = document.getElementById("taulerSound");
     audio.pause();
 }
 function reproducirSonidoPocoTiempo(){
-    var audio = document.getElementById("PocTemps");
+    let audio = document.getElementById("PocTemps");
     audio.play();
 }
 function reproducirSonidoMenu() {
-    var audio = document.getElementById("menuSound");
+    let audio = document.getElementById("menuSound");
     audio.play();
 }
 function reproducirSonidotaulell() {
-    var audio = document.getElementById("taulerSound");
+    let audio = document.getElementById("taulerSound");
     audio.play();
 }
 
@@ -309,9 +309,9 @@ function reproducirSonidotaulell() {
  * Funció que finalitza el joc
  */
 function verificarFinJuego() {
-    var cartas = $('.carta'); 
-    var todasOcultas = true;
-    var tiempoRestante = parseInt($("#temporizador").text()); // Asumiendo que el temporizador está en un elemento con id 'temporizador'
+    let cartas = $('.carta'); 
+    let todasOcultas = true;
+    let tiempoRestante = parseInt($("#temporizador").text()); // Asumiendo que el temporizador está en un elemento con id 'temporizador'
 
     cartas.each(function() {
         if ($(this).css('display') !== 'none') {
@@ -323,4 +323,3 @@ function verificarFinJuego() {
         alert('¡Felicidades! Has completado el juego.');
     }
 }
-
