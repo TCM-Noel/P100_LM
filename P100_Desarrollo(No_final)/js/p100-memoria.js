@@ -46,7 +46,7 @@ function iniciaJoc () {
     }
 
     controlarCartes();
-
+    $('#temporitzador').show();
     temporitzadorJoc();
 }
 
@@ -232,7 +232,7 @@ function temporitzadorJoc () {
         console.log(tiempoRestante);
         //$("#temporitzador").attr("value", tiempoRestante);
         $("#temporitzador").animate({ value: tiempoRestante }, 1000);
-        if(tiempoRestante<=7){
+        if(tiempoRestante<=5){
             reproducirSonidoPocoTiempo();
         }
         if (tiempoRestante <= 0) {
