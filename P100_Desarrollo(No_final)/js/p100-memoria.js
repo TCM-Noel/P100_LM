@@ -4,7 +4,7 @@ var separacioH=20, separacioV=20; // Separació entre cartes
 var nFiles=2, nColumnes=2; // Files i columnes
 var numCartesJugar = 0; // Numero que escull l'usuari per jugar cartes
 var numCartesMa = 52; // Mà "deck" per defecte
-
+var guanyat=false;
 // Dues mans amb la que es generarà el joc
 var barallaMa = [];
 
@@ -250,24 +250,27 @@ function temporitzadorJoc () {
     $("#temporitzador").animate({ value: tiempoRestante }, 1000);
     $("#temporitzador").attr("max", tiempoRestante);
     let temporizador = setInterval(function() {
-        tiempoRestante--;
-        console.log(tiempoRestante);
-        //$("#temporitzador").attr("value", tiempoRestante);
-        $("#temporitzador").animate({ value: tiempoRestante }, 1000);
-        if(tiempoRestante<=5){
-            reproducirSonidoPocoTiempo();
+        if(!guanyat){
+            tiempoRestante--;
+            console.log(tiempoRestante);
+            //$("#temporitzador").attr("value", tiempoRestante);
+            $("#temporitzador").animate({ value: tiempoRestante }, 1000);
+            if(tiempoRestante<=5){
+                reproducirSonidoPocoTiempo();
+            }
+            if (tiempoRestante <= 0) {
+                clearInterval(temporizador);
+                setTimeout(function() {
+                    $("#temporitzador").text("El temps s'ha esgotat");
+                     // Acciones cuando el tiempo se acabe
+                     $('.carta').hide();
+                     pausarSonidoPocoTiempo();
+                     pausarSonidotaulell();
+                     senseTemps();
+                }, 1000);
+            }    
         }
-        if (tiempoRestante <= 0) {
-            clearInterval(temporizador);
-            setTimeout(function() {
-                $("#temporitzador").text("El temps s'ha esgotat");
-                 // Acciones cuando el tiempo se acabe
-                 $('.carta').hide();
-                 pausarSonidoPocoTiempo();
-                 pausarSonidotaulell();
-                 senseTemps();
-            }, 1000);
-        }
+        
     }, 1000); 
     
     
@@ -276,9 +279,14 @@ function temporitzadorJoc () {
 /**
  * Funcions de so
  */
+function tornarAlMenu(){
+    location.href="p100-memoria.html";
+}
 function senseTemps(){
     let audio = document.getElementById("perdut");
     audio.play();
+    alert('Ja no tens més temps!');
+    tornarAlMenu();
 }
 function pausarSonidoPocoTiempo(){
     let audio = document.getElementById("PocTemps");
@@ -320,6 +328,8 @@ function verificarFinJuego() {
     });
 
     if (todasOcultas) {
+        guanyat =true;
         alert('¡Felicidades! Has completado el juego.');
+        tornarAlMenu();
     }
 }
