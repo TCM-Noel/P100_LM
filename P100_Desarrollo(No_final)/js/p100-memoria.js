@@ -205,6 +205,7 @@ function controlarCartes () {
                 if (clasePar1 == clasePar2){
                     par2.hide();
                     par1.hide();
+                    verificarFinJuego();
                 } else {
                     $(par1).toggleClass("carta-girada");
                     $(par2).toggleClass("carta-girada");
@@ -222,16 +223,60 @@ function controlarCartes () {
  */
 function temporitzadorJoc () {
     // Temporizador
-    let tiempoRestante = 100; 
+    
+    let tiempoRestante = 3*numCartesJugar;
+    $("#temporitzador").animate({ value: tiempoRestante }, 1000);
+    $("#temporitzador").attr("max", tiempoRestante);
     let temporizador = setInterval(function() {
         tiempoRestante--;
-        $("#temporitzador").text(tiempoRestante);
+        console.log(tiempoRestante);
+        //$("#temporitzador").attr("value", tiempoRestante);
+        $("#temporitzador").animate({ value: tiempoRestante }, 1000);
+        if(tiempoRestante<=7){
+            reproducirSonidoPocoTiempo();
+        }
         if (tiempoRestante <= 0) {
             clearInterval(temporizador);
-            $("#temporitzador").text("El temps s'ha esgotat");
-            // Acciones cuando el tiempo se acabe
+            setTimeout(function() {
+                $("#temporitzador").text("El temps s'ha esgotat");
+                 // Acciones cuando el tiempo se acabe
+                 $('.carta').hide();
+                 pausarSonidoPocoTiempo();
+                 pausarSonidotaulell();
+                 senseTemps();
+            }, 1000);
+            
+            
+            
         }
     }, 1000); 
+    
+    
+}
+
+
+
+
+function senseTemps(){
+    var audio = document.getElementById("perdut");
+    audio.play();
+}
+function pausarSonidoPocoTiempo(){
+    var audio = document.getElementById("PocTemps");
+    audio.pause();
+}
+//funciones de los sonidos
+function pausarSonidoMenu() {
+    var audio = document.getElementById("menuSound");
+    audio.pause();
+}
+function pausarSonidotaulell() {
+    var audio = document.getElementById("taulerSound");
+    audio.pause();
+}
+function reproducirSonidoPocoTiempo(){
+    var audio = document.getElementById("PocTemps");
+    audio.play();
 }
 //funciones de los sonidos
 function reproducirSonidoMenu() {
@@ -241,4 +286,18 @@ function reproducirSonidoMenu() {
 function reproducirSonidotaulell() {
     var audio = document.getElementById("taulerSound");
     audio.play();
+}
+function verificarFinJuego() {
+    var cartas = $('.carta'); 
+    var todasOcultas = true;
+
+    cartas.each(function() {
+        if ($(this).css('display') !== 'none') {
+            todasOcultas = false;
+        }
+    });
+
+    if (todasOcultas) {
+        alert('¡Felicidades! Has completado el juego.');
+    }
 }
