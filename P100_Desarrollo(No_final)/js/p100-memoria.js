@@ -5,7 +5,8 @@ var nFiles=2, nColumnes=2; // Files i columnes
 var numCartesJugar = 0; // Numero que escull l'usuari per jugar cartes
 var numCartesMa = 52; // Mà "deck" per defecte
 var guanyat=false;
-// Dues mans amb la que es generarà el joc
+
+// Mà amb la que es genera el joc
 var barallaMa = [];
 
 /**
@@ -69,6 +70,7 @@ function iniciaJoc () {
     }
 
     controlarCartes();
+
     temporitzadorJoc();
 }
 
