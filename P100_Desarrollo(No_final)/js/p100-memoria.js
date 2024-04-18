@@ -310,7 +310,10 @@ function reproducirSonidotaulell() {
  */
 function verificarFinJuego() {
     var cartas = $('.carta'); 
+
+ function verificarFinJuego() {
     var todasOcultas = true;
+    var tiempoRestante = parseInt($("#temporizador").text()); // Asumiendo que el temporizador está en un elemento con id 'temporizador'
 
     cartas.each(function() {
         if ($(this).css('display') !== 'none') {
@@ -322,3 +325,4 @@ function verificarFinJuego() {
         alert('¡Felicidades! Has completado el juego.');
     }
 }
+
