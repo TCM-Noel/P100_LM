@@ -12,19 +12,34 @@ var barallaMa = [];
  * Funció que comproba el resultat de l'input del menú 
  */
 function comprobarCartes () {
-    numCartesJugar = parseInt($('#numCartes').val());
-    if (numCartesJugar!="" && numCartesJugar%2===0 && numCartesJugar<= numCartesMa && numCartesJugar > 0) {
-        $('#missatgeError').css('display', 'none')
+    let comprobacio = comprobarNumCorrecte();
+    if (comprobacio) {
         $('#menuInicial').css('display', 'none')
         $('#footer').css('display', 'block')
         $('#tauler').css('display', 'block')
         iniciaJoc();
     } else {
-        $('#missatgeError').css('display', 'block')
         $('#footer').css('display', 'none')
         $('#tauler').css('display', 'none')
     }
 }
+
+/**
+ * Funció que posa l'input en diferents colors èr
+ * @returns Comprobació si el numero introduit pel jugador
+ */
+function comprobarNumCorrecte () {
+    numCartesJugar = parseInt($('#numCartes').val());
+    if (numCartesJugar!="" && numCartesJugar%2===0 && numCartesJugar<= numCartesMa && numCartesJugar > 0) {
+        $('#numCartes').removeClass('numIncorrecte');
+        console.log('hola')
+        return true;
+    } else {
+        $('#numCartes').addClass('numIncorrecte');
+        console.log('hola')
+        return false;
+    }
+}   
 
 /**
  * Funció que genera tot el joc
@@ -245,18 +260,15 @@ function temporitzadorJoc () {
                  pausarSonidotaulell();
                  senseTemps();
             }, 1000);
-            
-            
-            
         }
     }, 1000); 
     
     
 }
 
-
-
-
+/**
+ * Funcions de so
+ */
 function senseTemps(){
     var audio = document.getElementById("perdut");
     audio.play();
@@ -265,7 +277,6 @@ function pausarSonidoPocoTiempo(){
     var audio = document.getElementById("PocTemps");
     audio.pause();
 }
-//funciones de los sonidos
 function pausarSonidoMenu() {
     var audio = document.getElementById("menuSound");
     audio.pause();
@@ -278,7 +289,6 @@ function reproducirSonidoPocoTiempo(){
     var audio = document.getElementById("PocTemps");
     audio.play();
 }
-//funciones de los sonidos
 function reproducirSonidoMenu() {
     var audio = document.getElementById("menuSound");
     audio.play();
@@ -287,6 +297,10 @@ function reproducirSonidotaulell() {
     var audio = document.getElementById("taulerSound");
     audio.play();
 }
+
+/**
+ * Funció que finalitza el joc
+ */
 function verificarFinJuego() {
     var cartas = $('.carta'); 
     var todasOcultas = true;
