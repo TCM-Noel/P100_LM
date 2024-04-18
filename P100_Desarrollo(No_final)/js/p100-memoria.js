@@ -140,6 +140,7 @@ function crearMa () {
 }
 
 /**
+ * FIXME: Solucionar cálculos
  * Fa un càcul per tal de quadrar correctament les columnes i així tenir una bona distribució del taulell
  * @returns nColumnes
  */
@@ -155,11 +156,11 @@ function trobarFactor () {
     if (divisors.length === 1) { // Retorna el divisor en cas de que només existeixi un
         return divisors[0];
     } else {
-        let divisorMigGran = divisors[Math.floor(divisors.length / 2)];
-        let divisorMigPetit = divisors[Math.floor(divisors.length / 2)-1];
+        let divisorMigGran = divisors[Math.round(divisors.length / 2)];
+        let divisorMigPetit = divisors[Math.round(divisors.length / 2)-1];
         if (divisorMigPetit+1 != divisorMigGran) {
             let diferencia = (divisorMigGran - divisorMigPetit);
-            return divisorMigGran-(Math.round(diferencia/2))+1;
+            return divisorMigGran-(Math.round(diferencia/2));
         }
         return divisorMigGran;
     }
