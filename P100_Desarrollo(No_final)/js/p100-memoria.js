@@ -86,7 +86,7 @@ function iniciaJoc () {
 }
 
 /**
- * Funció que escolta als botons que trien cada mà
+ * Funció que escolta als botons que trien cada mà i aplica les configuracions òptimes
  * @param jugaAmb Cartes amb les que es juga
  * @param carta Passa la carta seleccionada
  */
@@ -108,18 +108,18 @@ function numCartesDeMa (jugaAmb, carta, maTriadaHTML, maDavantHTML, maDarreraHTM
         ampladaCarta = 111;
         alcadaCarta = 111;
     } else {
-        cartaWidth = 0; // Emplenar
-        cartaHeigh = 0; // Emplenar
-        ampladaCarta = 0; // Emplenar
-        alcadaCarta = 0; // Emplenar
+        cartaWidth = 0; // FIXME: Emplenar
+        cartaHeigh = 0; // FIXME: Emplenar
+        ampladaCarta = 0; // FIXME: Emplenar
+        alcadaCarta = 0; // FIXME: Emplenar
     }
+    comprobarNumCorrecte();
 }
 /**
  * Funció que genera la mà i controla el numero de cartes
  */
 function crearMa () {
     // S'afegeixen totes les cartes a l'array 'barallaMa'.
-    console.log(maTriada)
     for(let i = 1; i <= numCartesMa; i++){
         barallaMa.push(maTriada + i);
     }
@@ -146,27 +146,24 @@ function crearMa () {
 function trobarFactor () {
 
     let divisors = [];
+
+    // Iteració que controla que els divisors no siguin ni 1 ni el propi numero
     for (i = 1; i <= numCartesJugar; i++) {
         if (numCartesJugar%i === 0 && i !== 1 && i !== numCartesJugar) divisors.push(i);
     }
-    if (divisors.length === 1) {
+
+    if (divisors.length === 1) { // Retorna el divisor en cas de que només existeixi un
         return divisors[0];
     } else {
         let divisorMigGran = divisors[Math.floor(divisors.length / 2)];
         let divisorMigPetit = divisors[Math.floor(divisors.length / 2)-1];
         if (divisorMigPetit+1 != divisorMigGran) {
             let diferencia = (divisorMigGran - divisorMigPetit);
-            console.log("primer return")
-            console.log(divisorMigGran-(Math.floor(diferencia/2)))
-            return divisorMigGran-(Math.floor(diferencia/2));
+            return divisorMigGran-(Math.round(diferencia/2))+1;
         }
-        console.log("segundo return")
-        console.log(divisorMigGran)
         return divisorMigGran;
     }
 }
-console.log(trobarFactor(16)); // Prueba con 16
-console.log(trobarFactor(36)); // Prueba con 36
 
 /**
  * Funció que controla les mides del taulell de joc i les cartes
@@ -236,7 +233,6 @@ function controlarCartes () {
     let contadorClics = 0;
     let par1, par2;
     $(`.${maTriada}`).on("click", function() {
-        console.log(`.${maTriada}`);
         if (contadorClics === 1 && par1[0] === this) {
             return; // No fer res si es fa clic a la mateixa carta.
         }
