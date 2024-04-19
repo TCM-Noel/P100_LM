@@ -92,8 +92,14 @@ function iniciaJoc () {
  */
 function numCartesDeMa (jugaAmb, carta, maTriadaHTML, maDavantHTML, maDarreraHTML) {
     numCartesMa = jugaAmb;
-    $('.maTriadaJoc').css('filter', 'grayscale(90%)')
-    $(carta).css('filter', 'none')
+    $('.maTriadaJoc').css({
+        'filter' : 'grayscale(90%)',
+        'box-shadow' : '0px 0px 0px 0px'
+    })
+    $(carta).css({
+        'filter' : 'none',
+        'box-shadow' : 'rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px'
+    })
     maTriada = maTriadaHTML;
     maDavant = maDavantHTML;
     maDarrera = maDarreraHTML;

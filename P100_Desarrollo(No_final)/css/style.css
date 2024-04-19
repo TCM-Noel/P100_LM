@@ -70,7 +70,7 @@ header > table td {
     transition: .3s;
 }
 .maTriadaJoc:hover {
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px !important;
 }
 
 button {
@@ -217,10 +217,10 @@ input[type="number"] {
     background: #999 url(../images/pokemon.jpg) -777px 0;
 }
 
-/** ---- POKER ---- */
+/** ---- BARAJA ESPAÑOLA ---- */
 
 .cartaE {
-    width: 79px;	height: 123px; 
+    width: 125px; height: 192px;
     
     position: absolute;
     -webkit-perspective: 300px; /* Chrome, Safari, Opera  */
@@ -228,16 +228,15 @@ input[type="number"] {
  }
 
 .davantE {
-    background: #efefef url(../images/Baraja_española_completa.png);
+    background: #efefef url(../images/Baraja_espanola_completa.png);
     transform: rotate3d(0,1,0,-180deg);
 }
 
 .darreraE {
-    background: #999 url(../images/poker1.png) 0px -496px; 
+    background: #999 url(../images/Baraja_espanola_completa.png) 0px -720px; 
 }
 
 /* deck */
-/* fila 120 - columna 80) */
 .carta1 {background-position: 0 0;}
 .carta2 {background-position: -80px 0;} 
 .carta3 {background-position: -160px 0;}
@@ -293,7 +292,6 @@ input[type="number"] {
 
 
 /* pokemon */
-/* fila 111 - columna 111 */
 .cartaP1{background-position:    0       0; }
 .cartaP2{background-position: -111px     0; }
 .cartaP3{background-position: -222px     0; }
@@ -320,17 +318,55 @@ input[type="number"] {
 .cartaP24{background-position:  -777px     -222px; }
 
 
-/* poker1 */
-/* fila 124 - columna 79 */
+/* baralla espanyola */
 .cartaE1{background-position:    0     0  ; }
-.cartaE2{background-position:  -79px   0  ; }
-.cartaE3{background-position: -158px   0  ; }
-.cartaE4{background-position:    0    -124px; }
-.cartaE5{background-position:  -79px  -124px; }
-.cartaE6{background-position:  -158px -124px; }
+.cartaE2{background-position:    -125px     0  ; }
+.cartaE3{background-position:    -250px     0  ; }
+.cartaE4{background-position:    -375px     0  ; }
+.cartaE5{background-position:    -500px     0  ; }
+.cartaE6{background-position:    -625px     0  ; }
+.cartaE7{background-position:    -750px     0  ; }
+.cartaE8{background-position:    -     0  ; }
+.cartaE9{background-position:    0     0  ; }
+.cartaE10{background-position:    0     0  ; }
+.cartaE11{background-position:    0     0  ; }
+.cartaE12{background-position:    0     0  ; }
 
-/*...
-.carta39{background-position:    -948px -248px; }
-/*...
-.carta40{background-position:    0   -372px; }
-/*...*/
+.cartaE13{background-position:    0     0  ; }
+.cartaE14{background-position:    0     0  ; }
+.cartaE15{background-position:    0     0  ; }
+.cartaE16{background-position:    0     0  ; }
+.cartaE17{background-position:    0     0  ; }
+.cartaE18{background-position:    0     0  ; }
+.cartaE19{background-position:    0     0  ; }
+.cartaE20{background-position:    0     0  ; }
+.cartaE21{background-position:    0     0  ; }
+.cartaE22{background-position:    0     0  ; }
+.cartaE23{background-position:    0     0  ; }
+.cartaE24{background-position:    0     0  ; }
+
+.cartaE25{background-position:    0     0  ; }
+.cartaE26{background-position:    0     0  ; }
+.cartaE27{background-position:    0     0  ; }
+.cartaE28{background-position:    0     0  ; }
+.cartaE29{background-position:    0     0  ; }
+.cartaE30{background-position:    0     0  ; }
+.cartaE31{background-position:    0     0  ; }
+.cartaE32{background-position:    0     0  ; }
+.cartaE33{background-position:    0     0  ; }
+.cartaE34{background-position:    0     0  ; }
+.cartaE35{background-position:    0     0  ; }
+.cartaE36{background-position:    0     0  ; }
+
+.cartaE37{background-position:    0     0  ; }
+.cartaE38{background-position:    0     0  ; }
+.cartaE39{background-position:    0     0  ; }
+.cartaE40{background-position:    0     0  ; }
+.cartaE41{background-position:    0     0  ; }
+.cartaE42{background-position:    0     0  ; }
+.cartaE43{background-position:    0     0  ; }
+.cartaE44{background-position:    0     0  ; }
+.cartaE45{background-position:    0     0  ; }
+.cartaE46{background-position:    0     0  ; }
+.cartaE47{background-position:    0     0  ; }
+.cartaE48{background-position:    0     0  ; }
