@@ -121,7 +121,9 @@ function numCartesDeMa (jugaAmb, carta, maTriadaHTML, maDavantHTML, maDarreraHTM
 function crearMa () {
     // S'afegeixen totes les cartes a l'array 'barallaMa'.
     for(let i = 1; i <= numCartesMa; i++){
-        barallaMa.push(maTriada + i);
+        // Condició que controla que la mà no sigui "cartaP" i la carta no sigui la 8 (la part de darrera de les cartes)
+        if (maTriada === 'cartaP' && i === 8) barallaMa.push(maTriada + i + 1); 
+        else barallaMa.push(maTriada + i);
     }
 
     // Gestió de columnes i files
