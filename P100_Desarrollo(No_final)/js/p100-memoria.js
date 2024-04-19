@@ -260,6 +260,7 @@ function controlarCartes () {
                     $(par1).toggleClass("carta-girada");
                     $(par2).toggleClass("carta-girada");
                 }
+                console.log(maTriada)
                 $(`.${maTriada}`).removeClass('noClick'); // Elimina la classe noClick que bloqueja els events
             }, 1000); // Retard d'un segon
             
@@ -280,41 +281,38 @@ function temporitzadorJoc () {
     let temporizador = setInterval(function() {
         if(!guanyat){
             tiempoRestante--;
-            //$("#temporitzador").attr("value", tiempoRestante);
             $("#temporitzador").animate({ value: tiempoRestante }, 1000);
-            if(tiempoRestante<=5){
+            if(tiempoRestante<=5){ // Quan quedin 5 segons, es posa una música de tensió per advertir a l'usuari
                 reproducirSonidoPocoTiempo();
             }
-            if (tiempoRestante <= 0) {
+            if (tiempoRestante <= 0) { // Accions que es realitzen quan el temps s'acaba
                 clearInterval(temporizador);
                 setTimeout(function() {
-                    $("#temporitzador").text("El temps s'ha esgotat");
-                     // Acciones cuando el tiempo se acabe
-                     $(`.${maTriada}`).hide();
-                     pausarSonidoPocoTiempo();
-                     pausarSonidotaulell();
-                     senseTemps();
-                     verificarFinJuego(true);
+                    //$(`.${maTriada}`).hide();
+                    pausarSonidoPocoTiempo();
+                    pausarSonidotaulell();
+                    senseTemps();
+                    verificarFinJuego(true);
                 }, 1000);
             }    
         }
         
     }, 1000); 
-    
-    
+}
+
+/**
+ * Funció que torna al menú principal
+ */
+function tornarAlMenu(){
+    location.href="p100-memoria.html";
 }
 
 /**
  * Funcions de so
  */
-function tornarAlMenu(){
-    location.href="p100-memoria.html";
-}
 function senseTemps(){
     let audio = document.getElementById("perdut");
     audio.play();
-    alert('Ja no tens més temps!');
-    tornarAlMenu();
 }
 function pausarSonidoPocoTiempo(){
     let audio = document.getElementById("PocTemps");
@@ -344,9 +342,10 @@ function reproducirSonidotaulell() {
 /**
  * Funció que finalitza el joc
  */
-function verificarFinJuego() {
+function verificarFinJuego(tiempoAgotado) {
     let cartas = $(`.${maTriada}`); 
     let todasOcultas = true;
+
     cartas.each(function() {
         if ($(this).css('display') !== 'none') {
             todasOcultas = false;
@@ -354,7 +353,7 @@ function verificarFinJuego() {
     });
 
     if (todasOcultas) {
-        guanyat = true;
+        guanyat=true;
         alert('¡Felicidades! Has completado el juego.');
         tornarAlMenu();
     } else if (tiempoAgotado) {
