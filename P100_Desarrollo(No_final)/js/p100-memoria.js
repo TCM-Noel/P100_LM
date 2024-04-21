@@ -162,8 +162,10 @@ function trobarFactor () {
         let divisorMigPetit = divisors[Math.round(divisors.length / 2)-1];
         if (divisorMigPetit+1 != divisorMigGran) {
             let diferencia = (divisorMigGran - divisorMigPetit);
+            if((divisorMigGran-(Math.round(diferencia/2)))%2==1){return divisorMigGran-(Math.round(diferencia/2))+1; }
             return divisorMigGran-(Math.round(diferencia/2));
         }
+        if(divisorMigGran%2==1) divisorMigGran+1;
         return divisorMigGran;
     }
 }
