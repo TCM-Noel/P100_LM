@@ -114,10 +114,10 @@ function numCartesDeMa (jugaAmb, carta, maTriadaHTML, maDavantHTML, maDarreraHTM
         ampladaCarta = 111;
         alcadaCarta = 111;
     } else {
-        cartaWidth = 0; // FIXME: Emplenar
-        cartaHeigh = 0; // FIXME: Emplenar
-        ampladaCarta = 0; // FIXME: Emplenar
-        alcadaCarta = 0; // FIXME: Emplenar
+        cartaWidth = 118; // FIXME: Emplenar
+        cartaHeigh = 160; // FIXME: Emplenar
+        ampladaCarta = 78; // FIXME: Emplenar
+        alcadaCarta = 120; // FIXME: Emplenar
     }
     comprobarNumCorrecte();
 }
