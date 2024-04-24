@@ -350,7 +350,7 @@ function temporitzadorJoc() {
                 pausarSonidoPocoTiempo(); // Pausar el so de tensió
                 pausarSonidotaulell(); // Pausar un altre so que estigui reproduint-se
                 senseTemps(); // Funció per manejar el final del temps
-                verificarFinJuego(true); // Verificar si el joc ha de acabar
+                verificarFinJuego(true, 'T\'has quedat sense temps! Has perdut.'); // Verificar si el joc ha de acabar
             } else {
                 requestAnimationFrame(tick); // Continuar el cicle del temporitzador
             }
