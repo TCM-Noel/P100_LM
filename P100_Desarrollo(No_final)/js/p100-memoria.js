@@ -31,6 +31,7 @@ function comprobarCartes (numCartes) {
         $('#footer').css('display', 'block')
         $('#tauler').css('display', 'block')
         $('#temporitzador').show();
+        $('#botoInici').show();
         reproducirSonidotaulell();
         iniciaJoc();
     } else {
