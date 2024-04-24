@@ -6,7 +6,7 @@
         <script src="js/jquery-3.7.1.js"></script>
         <script src="js/p100-memoria.js"></script>
     </head>
-    <body>
+    <body onload="carregarTemps()">
 
         <header>
             <table>
@@ -14,15 +14,20 @@
                     <td class="manrope-bold">Joc memory - Fet per: Alex Barroso,
                         Efrén Cayuela i Noel Sariñena</td>
                     <td class="manrope-bold">
-                        <div id="marcador">
+                        <div id="btnMarcador" onclick="mostrarUltimTemps()">
                             📊 Marcadors
                         </div>
-                        <div id="panellInfo" class="manrope-light" style="display: none;">
-
-                        </div>
+                        <div id="panellInfo" class="manrope-light" style="display: none;"></div>
                     </td>
                 </tr>
             </table>
+            <div id="marcador" style="display: none;">
+                <div style="position: relative;">
+                    <img src="images/x.png" onclick="mostrarUltimTemps()" id="creuMarcador">
+                    <h2 class="manrope-bold">L'ultim temps enregistrat:</h2>
+                    <p id="tempsEnregistrat">---</p>
+                </div>
+            </div>
         </header>
 
         <div id="menuInicial">
