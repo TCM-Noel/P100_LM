@@ -10,11 +10,11 @@
 
         <header>
             <button
-                            onclick="tornarAlMenu()"
-                            id="botoInici"
-                            class="manrope-normal">
-                            Tornar al inici
-                        </button>
+                onclick="tornarAlMenu()"
+                id="botoInici"
+                class="manrope-normal">
+                Tornar al inici
+            </button>
             <table>
                 <tr>
                     <td class="manrope-bold">Joc memory - Fet per: Alex Barroso,
@@ -30,8 +30,10 @@
             <div id="marcador" style="display: none;">
                 <div style="position: relative;">
                     <img src="images/x.png" onclick="mostrarUltimTemps()" id="creuMarcador">
-                    <h2 class="manrope-bold">L'ultim temps enregistrat:</h2>
-                    <p id="tempsEnregistrat">---</p>
+                    <h2 class="manrope-light">Número de cartes de l'ultima partida:</h2>
+                    <h1 id="cartesEnregistrades" class="manrope-normal">---</h1>
+                    <h2 class="manrope-light">Temps enregistrat:</h2>
+                    <h1 id="tempsEnregistrat" class="manrope-normal">---</h1>
                 </div>
             </div>
         </header>

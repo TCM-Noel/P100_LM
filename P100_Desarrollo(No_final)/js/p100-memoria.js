@@ -5,7 +5,8 @@ var numCartesJugar = 0; // Numero que escull l'usuari per jugar cartes
 var numCartesMa = 52; // Mà "deck" per defecte
 var guanyat=false; // Variable que controla si el jugador ha guanyat
 var comptadorClics = 0; // Variable que fa el recompte de clicks del joc
-var marcadorMostrat = false;
+var marcadorMostrat = false; // Variable que controla que la finestra de marcador sigui visible
+var elapsedTime;
 
 // Mà amb la que es genera el joc
 var ampladaCarta = 80, alcadaCarta = 120; // Se li assigna l'alçada i l'amplada del taulell dinàmicament
@@ -16,16 +17,52 @@ var maDarrera = 'darrera';
 var cartaWidth = 120;
 var cartaHeigh = 160;
 
-function carregarTemps() {
+/**
+ * Funció que genera tot el joc
+ */
+function iniciaJoc () {
+    $('#marcador').fadeOut(150);
+    marcadorMostrat = false;
 
+    actualitzarPanellInfo();
+
+    crearMa();
+    
+    midesGenerals();
+    
+    // Doble iteració per generar les cartes en el taulell
+    let comptadorCartes = 0;
+    for (i = 0; i < nFiles; i++) {
+        for (j = 0; j < nColumnes; j++) {
+            if (comptadorCartes !== numCartesJugar) {
+                generarCarta(i+1, j+1);
+                comptadorCartes++;
+            }
+        }
+    }
+
+    controlarCartes();
+
+    temporitzadorJoc();
 }
 
+/**
+ * Funció que s'executa al carregar la pàgina i que recupera el temps i la modalitat de joc en la que s'ha guardat l'anterior partida 
+ */
+function carregarTemps() {
+    $('#cartesEnregistrades').text(`${localStorage.getItem("cartesJoc")} cartes`);
+    $('#tempsEnregistrat').text(`${localStorage.getItem("temps")} segons`);
+}
+
+/**
+ * Funció que mostra la finestra del marcador
+ */
 function mostrarUltimTemps() {
     if (marcadorMostrat) {
-        $('#marcador').css('display', 'none');
+        $('#marcador').fadeOut(150);
         marcadorMostrat = false;
     } else {
-        $('#marcador').css('display', 'block');
+        $('#marcador').fadeIn(150);
         marcadorMostrat = true;
     }
 }
@@ -65,7 +102,7 @@ function comprobarCartes (numCartes) {
  * @returns Comprobació si el numero introduit pel jugador
  */
 function comprobarNumCorrecte () {
-    inp = $('#numCartes');
+    let inp = $('#numCartes');
     numCartesJugar = parseInt(inp.val());
     if (numCartesJugar!="" && numCartesJugar%2===0 && numCartesJugar<= numCartesMa && numCartesJugar > 0) {
         inp.removeClass('numIncorrecte');
@@ -83,32 +120,6 @@ function comprobarNumCorrecte () {
 }   
 
 /**
- * Funció que genera tot el joc
- */
-function iniciaJoc () {
-    actualitzarPanellInfo();
-
-    crearMa();
-    
-    midesGenerals();
-    
-    // Doble iteració per generar les cartes en el taulell
-    let comptadorCartes = 0;
-    for (i = 0; i < nFiles; i++) {
-        for (j = 0; j < nColumnes; j++) {
-            if (comptadorCartes !== numCartesJugar) {
-                generarCarta(i+1, j+1);
-                comptadorCartes++;
-            }
-        }
-    }
-
-    controlarCartes();
-
-    temporitzadorJoc();
-}
-
-/**
  * Funció que actualitza la informació del panell conforme progresa el joc
  */
 function actualitzarPanellInfo () {
@@ -122,17 +133,19 @@ function actualitzarPanellInfo () {
  */
 function numCartesDeMa (jugaAmb, carta, maTriadaHTML, maDavantHTML, maDarreraHTML) {
     numCartesMa = jugaAmb;
-    $('.maTriadaJoc').css({
+    $('.maTriadaJoc').css({ // Posa els atributs css a la mà seleccionada
         'filter' : 'grayscale(90%)',
         'box-shadow' : '0px 0px 0px 0px'
     })
-    $(carta).css({
+    $(carta).css({ // Treu els atributs css a la mà seleccionada
         'filter' : 'none',
         'box-shadow' : 'rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px'
     })
+    // Assigna els valors a les variables globals
     maTriada = maTriadaHTML;
     maDavant = maDavantHTML;
     maDarrera = maDarreraHTML;
+    // Condició que assigna els valors dels tamanys de les variables globals per tal de generar el joc dinàmicament
     if (maTriada == 'carta') {
         cartaWidth = 120;
         cartaHeigh = 160;
@@ -151,6 +164,7 @@ function numCartesDeMa (jugaAmb, carta, maTriadaHTML, maDavantHTML, maDarreraHTM
     }
     comprobarNumCorrecte();
 }
+
 /**
  * Funció que genera la mà i controla el numero de cartes
  */
@@ -322,7 +336,7 @@ function temporitzadorJoc() {
     let startTime = Date.now(); // Guardar el temps d'inici
 
     function tick() {
-        let elapsedTime = Date.now() - startTime; // Calcular el temps transcorregut
+        elapsedTime = Date.now() - startTime; // Calcular el temps transcorregut
         let tiempoActual = tiempoRestante - Math.floor(elapsedTime / 1000); // Calcular el temps restant
 
         if (!guanyat) {
@@ -402,6 +416,8 @@ function verificarFinJuego(tiempoAgotado, mensajeAlert) {
 
     if (todasOcultas) { // Totes ocultes = l'usuari guanya
         guanyat=true;
+        localStorage.setItem("cartesJoc", numCartesJugar)
+        localStorage.setItem("temps", elapsedTime.toString()[0])
         alert('¡Felicidades! Has completado el juego.');
         tornarAlMenu();
     } else if (tiempoAgotado) { // Qualsevol altre condició, el joc ha finalitzat + missatge personalitzat
