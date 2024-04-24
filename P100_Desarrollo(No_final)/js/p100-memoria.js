@@ -282,33 +282,39 @@ function controlarCartes () {
 /**
  * Funció que controla el temporitzador del joc
  */
-function temporitzadorJoc () {
-    // Temporizador
+function temporitzadorJoc() {
+    // Temporitzador
     
-    let tiempoRestante = 3*numCartesJugar;
-    $("#temporitzador").animate({ value: tiempoRestante }, 1000);
-    $("#temporitzador").attr("max", tiempoRestante);
-    let temporizador = setInterval(function() {
-        if(!guanyat){
-            tiempoRestante--;
-            $("#temporitzador").animate({ value: tiempoRestante }, 1000);
-            if(tiempoRestante<=5){ // Quan quedin 5 segons, es posa una música de tensió per advertir a l'usuari
+    let tiempoRestante = 3 * numCartesJugar; // Calcular el temps total basat en el nombre de cartes
+    $("#temporitzador").attr("max", tiempoRestante); // Establir el valor màxim de la barra
+    $("#temporitzador").val(tiempoRestante); // Inicialitzar la barra de temps amb el valor màxim
+    let startTime = Date.now(); // Guardar el temps d'inici
+
+    function tick() {
+        let elapsedTime = Date.now() - startTime; // Calcular el temps transcorregut
+        let tiempoActual = tiempoRestante - Math.floor(elapsedTime / 1000); // Calcular el temps restant
+
+        if (!guanyat) {
+            $("#temporitzador").val(tiempoActual); // Actualitzar el valor de la barra de temps
+
+            if (tiempoActual <= 5) { // Quan quedin 5 segons, es reprodueix un so de tensió
                 reproducirSonidoPocoTiempo();
             }
-            if (tiempoRestante <= 0) { // Accions que es realitzen quan el temps s'acaba
-                clearInterval(temporizador);
-                setTimeout(function() {
-                    //$(`.${maTriada}`).hide();
-                    pausarSonidoPocoTiempo();
-                    pausarSonidotaulell();
-                    senseTemps();
-                    verificarFinJuego(true);
-                }, 1000);
-            }    
+
+            if (tiempoActual <= 0) { // Quan el temps s'acabi, realitzar diverses accions
+                pausarSonidoPocoTiempo(); // Pausar el so de tensió
+                pausarSonidotaulell(); // Pausar un altre so que estigui reproduint-se
+                senseTemps(); // Funció per manejar el final del temps
+                verificarFinJuego(true); // Verificar si el joc ha de acabar
+            } else {
+                requestAnimationFrame(tick); // Continuar el cicle del temporitzador
+            }
         }
-        
-    }, 1000); 
+    }
+
+    requestAnimationFrame(tick); // Iniciar el temporitzador amb requestAnimationFrame
 }
+
 
 /**
  * Funció que torna al menú principal
