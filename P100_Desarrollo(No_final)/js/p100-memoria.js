@@ -49,6 +49,7 @@ function comprobarCartes (numCartes) {
         $('#btnMarcador').css('display', 'none')
         $('#panellInfo').css('display', 'block')
         $('#temporitzador').show();
+        $('#botoInici').show();
         reproducirSonidotaulell();
         iniciaJoc();
     } else {

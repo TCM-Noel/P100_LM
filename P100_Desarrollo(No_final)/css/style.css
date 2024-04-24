@@ -176,6 +176,17 @@ input[type="number"] {
     background-color: rgb(255, 113, 113);
     transition: .2s;
 }
+#botoInici {
+    border-radius: 30px 30px 30px 30px;    
+    border: 0.1px solid black;
+    padding: 0.5rem;
+    background-color: rgb(62, 62, 196);
+    font-size: 12px;
+    margin-left: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: none;
+} 
 
 #comensarJoc {
     border-radius: 0 20px 20px 0;    
