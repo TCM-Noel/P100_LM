@@ -13,7 +13,14 @@
                 <tr>
                     <td class="manrope-bold">Joc memory - Fet per: Alex Barroso,
                         Efrén Cayuela i Noel Sariñena</td>
-                    <td class="manrope-bold">📊 Marcadors</td>
+                    <td class="manrope-bold">
+                        <div id="marcador">
+                            📊 Marcadors
+                        </div>
+                        <div id="panellInfo" class="manrope-light" style="display: none;">
+
+                        </div>
+                    </td>
                 </tr>
             </table>
         </header>
@@ -28,7 +35,7 @@
                         <h2 class="manrope-normal" style="text-align: center;">
                             <i>Escull la mà amb la que vols jugar</i>
                         </h2>
-                        <h3 class="manrope-normal" style="text-align: center; font-weight: 200;">
+                        <h3 class="manrope-light" style="text-align: center;">
                             (Fes click sobre elles)
                         </h3>
                         <table id="maTriada">
@@ -37,7 +44,7 @@
                                     <div
                                         class="maTriadaJoc"
                                         onclick="numCartesDeMa(52, this, 'carta', 'davant', 'darrera')"
-                                        style="width: 80px; height: 120px; background: url(./images/deck.png) 0px -480px; scale: 1.3; filter: none;">
+                                        style="width: 80px; height: 120px; background: url(./images/deck.png) 0px -480px; scale: 1.3; filter: none; box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px">
                                     </div>
                                 </td>
                                 <td>
@@ -126,6 +133,9 @@
                 <audio id="menuSound"
                     src="so/Elevator Music (Kevin MacLeod) - Gaming Background Music (HD).mp3"></audio>
             </div>
+            
+            </table>
+            
         </div>
 
         <footer id="footer" style="display: none;">
