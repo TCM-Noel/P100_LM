@@ -348,7 +348,7 @@ function temporitzadorJoc() {
 
             if (tiempoActual <= 0) { // Quan el temps s'acabi, realitzar diverses accions
                 pausarSonidoPocoTiempo(); // Pausar el so de tensió
-                pausarSonidotaulell(); // Pausar un altre so que estigui reproduint-se
+                pausarSonidoTaulell(); // Pausar un altre so que estigui reproduint-se
                 senseTemps(); // Funció per manejar el final del temps
                 verificarFinJuego(true, 'T\'has quedat sense temps! Has perdut.'); // Verificar si el joc ha de acabar
             } else {
