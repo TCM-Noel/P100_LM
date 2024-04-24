@@ -6,7 +6,7 @@ var numCartesMa = 52; // Mà "deck" per defecte
 var guanyat=false; // Variable que controla si el jugador ha guanyat
 var comptadorClics = 0; // Variable que fa el recompte de clicks del joc
 var marcadorMostrat = false; // Variable que controla que la finestra de marcador sigui visible
-var elapsedTime;
+var elapsedTime; // Calcula el temps transcurrit
 
 // Mà amb la que es genera el joc
 var ampladaCarta = 80, alcadaCarta = 120; // Se li assigna l'alçada i l'amplada del taulell dinàmicament
