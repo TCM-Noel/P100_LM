@@ -315,40 +315,37 @@ function controlarCartes () {
  * Función que controla el temporizador del juego
  */
 function temporitzadorJoc() {
-    // Temporizador basado en tiempo real
-    let tiempoTotal = 3 * numCartesJugar;
-    let tiempoInicio = Date.now();
-    $("#temporitzador").attr("max", tiempoTotal);
-    $("#temporitzador").val(tiempoTotal);
-    
-    let temporizador = setInterval(() => { 
-        let tiempoTranscurrido = Math.floor((Date.now() - tiempoInicio) / 1000);
-        let tiempoRestante = tiempoTotal - tiempoTranscurrido;
+    // Temporitzador
+    let tiempoRestante = 3 * numCartesJugar; // Calcular el temps total basat en el nombre de cartes
+    $("#temporitzador").attr("max", tiempoRestante); // Establir el valor màxim de la barra
+    $("#temporitzador").val(tiempoRestante); // Inicialitzar la barra de temps amb el valor màxim
+    let startTime = Date.now(); // Guardar el temps d'inici
+
+    function tick() {
+        let elapsedTime = Date.now() - startTime; // Calcular el temps transcorregut
+        let tiempoActual = tiempoRestante - Math.floor(elapsedTime / 1000); // Calcular el temps restant
 
         if (!guanyat) {
-            // FIXME: Animación de temporizador
-            $("#temporitzador").animate({ value: tiempoRestante }, 100, "linear") // Animació de la barra del temporitzador
-            //val(tiempoRestante);
+            $("#temporitzador").val(tiempoActual); // Actualitzar el valor de la barra de temps
 
-            if (tiempoRestante <= 5) { // Modificador de música pels ultims 5 segons
+            if (tiempoActual <= 5) { // Quan quedin 5 segons, es reprodueix un so de tensió
                 reproducirSonidoPocoTiempo();
             }
 
-            if (tiempoRestante <= 0) { // Condició que finalitza el joc en cas de superar el temps límit
-                clearInterval(temporizador);
-                setTimeout(() => {
-                    pausarSonidoPocoTiempo();
-                    pausarSonidoTaulell();
-                    senseTemps();
-                    verificarFinJuego(true, 'Temps esgotat! Has perdut.');
-                }, 1000);
+            if (tiempoActual <= 0) { // Quan el temps s'acabi, realitzar diverses accions
+                pausarSonidoPocoTiempo(); // Pausar el so de tensió
+                pausarSonidotaulell(); // Pausar un altre so que estigui reproduint-se
+                senseTemps(); // Funció per manejar el final del temps
+                verificarFinJuego(true); // Verificar si el joc ha de acabar
+            } else {
+                requestAnimationFrame(tick); // Continuar el cicle del temporitzador
             }
-        } else {
-            clearInterval(temporizador);
         }
+    }
 
-    }, 1000);
+    requestAnimationFrame(tick); // Iniciar el temporitzador amb requestAnimationFrame
 }
+
 
 /**
  * Funció que torna al menú principal
