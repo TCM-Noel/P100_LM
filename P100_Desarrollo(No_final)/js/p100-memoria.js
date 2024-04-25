@@ -337,18 +337,20 @@ function temporitzadorJoc() {
 
     function tick() {
         elapsedTime = Date.now() - startTime; // Calcular el temps transcorregut
-        let tiempoActual = tiempoRestante - Math.floor(elapsedTime / 1000); // Calcular el temps restant
+        let tiempoActual = tiempoRestante - elapsedTime / 1000; // Calcular el temps restant
 
         if (!guanyat) {
-            $("#temporitzador").val(tiempoActual); // Actualitzar el valor de la barra de temps
+            $("#temporitzador").val(tiempoActual.toFixed(2)); // Actualitzar el valor de la barra de temps
 
             if (tiempoActual <= 5) { // Quan quedin 5 segons, es reprodueix un so de tensió
                 reproducirSonidoPocoTiempo();
             }
 
             if (tiempoActual <= 0) { // Quan el temps s'acabi, realitzar diverses accions
+                
                 pausarSonidoPocoTiempo(); // Pausar el so de tensió
                 pausarSonidoTaulell(); // Pausar un altre so que estigui reproduint-se
+                pausarSonidoMenu();
                 senseTemps(); // Funció per manejar el final del temps
                 verificarFinJuego(true, 'T\'has quedat sense temps! Has perdut.'); // Verificar si el joc ha de acabar
             } else {
@@ -359,6 +361,8 @@ function temporitzadorJoc() {
 
     requestAnimationFrame(tick); // Iniciar el temporitzador amb requestAnimationFrame
 }
+
+
 
 
 /**
