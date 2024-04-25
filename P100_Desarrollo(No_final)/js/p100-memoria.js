@@ -422,6 +422,9 @@ function verificarFinJuego(tiempoAgotado, mensajeAlert) {
         guanyat=true;
         localStorage.setItem("cartesJoc", numCartesJugar)
         localStorage.setItem("temps", elapsedTime.toString()[0])
+        pausarSonidoPocoTiempo();
+        pausarSonidoTaulell(); 
+        pausarSonidoMenu();
         alert('¡Felicidades! Has completado el juego.');
         tornarAlMenu();
     } else if (tiempoAgotado) { // Qualsevol altre condició, el joc ha finalitzat + missatge personalitzat
