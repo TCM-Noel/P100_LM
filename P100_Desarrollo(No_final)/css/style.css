@@ -2,6 +2,11 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 
+.manrope-light {
+    font-family: "Manrope", sans-serif;
+    font-weight: 300;
+  }
+
 .manrope-normal {
   font-family: "Manrope", sans-serif;
 }
@@ -12,10 +17,7 @@
 }
 
 /** -------------------- ESTILS GENERALS -------------------- */
-#temporitzador {
-    width: 90%; /* Ajusta el ancho de la barra de progreso */
-    height: 30px; /* Ajusta la altura de la barra de progreso */
-}
+
 body {
     text-align: center;
     /*background: #9e9e9e url(../images/fons.webp);*/
@@ -40,6 +42,55 @@ header > table {
 header > table td {
     width: 50%;
     font-size: 18px;
+}
+
+#btnMarcador {
+    padding: 10px;
+    width: fit-content;
+    margin: 0 auto;
+    border-radius: 10px;
+    transition: ease-in-out .2s;
+    cursor: pointer;
+
+    &&:hover {
+        background-color: #e6e6e6;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    }
+}
+#btnMarcador::selection {
+    background-color: transparent;
+}
+
+#marcador {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #e4e4e4;
+    z-index: 100;
+    padding: 2rem 3rem 2rem 3rem;
+    border-radius: 1rem;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+
+    ::selection {
+        background-color: transparent;
+    }
+}
+
+#creuMarcador {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 0%;
+    left: 100%;
+    margin-top: -2rem;
+    margin-left: .2rem;
+    filter: grayscale(50);
+    cursor: pointer;
+}
+
+#marcador > div > h1 {
+    margin-top: -10px;
 }
 
 #menuInicial {
@@ -67,29 +118,18 @@ header > table td {
     transition: .3s;
 }
 .maTriadaJoc:hover {
-    filter: none;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
-}
-
-#missatgeError {
-    width: 25%;
-    margin: 0 auto;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 16px;
-    font-weight: bold;
-    color: white;
-    background-color: rgb(157, 4, 4);
-    border-radius: 5px;
-    padding: 1px;
-    padding-left: 5px;
-    padding-right: 5px;
-    margin-bottom: 10px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px !important;
 }
 
 button {
     padding: 15px;
     border-radius: 5px;
     margin: 1px 0 0 0;
+    transition: .2s;
+
+    &&:hover {
+        transform: scale(0.98);
+    }
 }
 
 .modalitat {
@@ -97,8 +137,17 @@ button {
     padding-right: 2rem;
 }
 
+.textModalitat {
+    width: 40%;
+}
+
 .fletxa {
     text-align: end;
+    padding-right: 10px;
+    font-size: 28px;
+    color: rgb(232, 232, 232);
+    -webkit-text-stroke-width: 0.5px;
+    -webkit-text-stroke-color: black;
 }
 
 #facil {
@@ -114,10 +163,45 @@ button {
 }
 
 input[type="number"] {
-    padding: 10px;
+    padding: 0.8rem;
+    font-size: 18px;
+    text-align: center;
+    width: 15rem;
+    transition: ease-in-out .2s;
+    border-radius: 20px 0 0 20px;
 }
 
+.numIncorrecte {
+    background-color: rgb(255, 113, 113);
+    transition: .2s;
+}
+#botoInici {
+    border-radius: 30px 30px 30px 30px;    
+    border: 0.1px solid black;
+    padding: 0.5rem;
+    background-color: rgb(62, 62, 196);
+    font-size: 12px;
+    margin-left: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: none;
+} 
+
+#comensarJoc {
+    border-radius: 0 20px 20px 0;    
+    border: 0.1px solid black;
+    padding: 0.8rem;
+    background-color: #cafec5;
+    font-size: 17px;
+} 
+
 /** -------------------- ESTILS DEL JOC -------------------- */
+
+#temporitzador {
+    width: 90%; /* Ajusta el ancho de la barra de progreso */
+    height: 30px; /* Ajusta la altura de la barra de progreso */
+    display: none;
+}
 
 #tauler {
     border-radius: 10px;
@@ -129,93 +213,97 @@ input[type="number"] {
     box-shadow: 0 -1px 0 #999, 0 1px 0 #999, inset 0;
 }
 
-.carta {
-    width: 80px;	height: 120px;   /* deck */
-    /* width: 111px; height: 111px;  /* pokemon */
-    /* width: 79px;	height: 123px;   /* poker1 */
-    
-    position: absolute;
-    -webkit-perspective: 300px; /* Chrome, Safari, Opera  */
-    perspective: 300px;/*transition: all .3s; */
-}
-
-.carta:hover .cara{
-    box-shadow: 0 0 10px #aaa;
-}
-
 .cara {
     border-radius: 10px;
     width: 100%;	height: 100%;
     position: absolute;  /* per poder moure la carta */
 
     transition-property: transform, shadow;
-    transition-duration: .5s;
+    transition-duration: .4s;
 
     backface-visibility: hidden;
 }
 
-.darrera {
-    background: #999 url(../images/deck.png) 0px -480px; /*cartes DECK*/
-    /*background: #999 url(../images/poker1.png) 0px -496px; /*cartes POKER1*/
+.carta:hover .cara{
+    box-shadow: 0 0 10px #aaa;
 }
 
-.davant {
-    background: #efefef url(../images/deck.png);/*cartes DECK*/
-    /*background: #999 url(../images/poker1.png); /*cartes POKER1*/
-    transform: rotate3d(0,1,0,-180deg);
-}
-
-
-.carta-girada .darrera {
+.carta-girada .darrera,
+.carta-girada .darreraP,
+.carta-girada .darreraE {
     transform: rotate3d(0,1,0,180deg);
 }
 
-.carta-girada .davant {
+.carta-girada .davant,
+.carta-girada .davantP,
+.carta-girada .davantE {
     transform: rotate3d(0,1,0,0deg);
 }
-.davantP {
-    background: #efefef url(../images/pokemon.jpg);/*cartes DECK*/
-    /*background: #999 url(../images/poker1.png); /*cartes POKER1*/
-    transform: rotate3d(0,1,0,-180deg);
-}
-.cartaP {
-    
-    width: 111px; height: 111px;  /* pokemon */
-   /* width: 79px;	height: 123px;   /* poker1 */
-   
-   position: absolute;
-   -webkit-perspective: 300px; /* Chrome, Safari, Opera  */
-   perspective: 300px;/*transition: all .3s; */
-}
-.darreraP {
-    background: #999 url(../images/pokemon.jpg) 0px -480px; /*cartes DECK*/
-    /*background: #999 url(../images/poker1.png) 0px -496px; /*cartes POKER1*/
-}
 
-.davantE {
-    background: #efefef url(../images/Baraja_española_completa.png);/*cartes DECK*/
-    /*background: #999 url(../images/poker1.png); /*cartes POKER1*/
-    transform: rotate3d(0,1,0,-180deg);
-}
-.cartaE {
-    
-   /* width: 111px; height: 111px;  /* pokemon */
-    width: 79px;	height: 123px;   /* poker1 */
-   
-   position: absolute;
-   -webkit-perspective: 300px; /* Chrome, Safari, Opera  */
-   perspective: 300px;/*transition: all .3s; */
-}
-.darreraE {
-   /* background: #999 url(../images/Baraja_española_completa.png) 0px -480px; /*cartes DECK*/
-    background: #999 url(../images/poker1.png) 0px -496px; /*cartes POKER1*/
-}
 .noClick {
     pointer-events: none;
 }
 
-/* deck */
-/* fila 120 - columna 80) */
+/** ---- DECK ---- */
+
+.carta {
+    width: 80px;	height: 120px;
+    
+    position: absolute;
+    -webkit-perspective: 300px; /* Chrome, Safari, Opera  */
+    perspective: 300px;/*transition: all .3s; */
+}
+
+.davant {
+    background: #efefef url(../images/deck.png);
+    transform: rotate3d(0,1,0,-180deg);
+}
+
+.darrera {
+    background: #999 url(../images/deck.png) 0px -480px;
+}
+
+/** ---- POKEMON ---- */
+
+.cartaP {
+    width: 111px; height: 111px;  /* pokemon */
+   
+   position: absolute;
+   -webkit-perspective: 300px; /* Chrome, Safari, Opera  */
+   perspective: 300px;/*transition: all .3s; */
+}
+
+.davantP {
+    background: #efefef url(../images/pokemon.jpg);
+    transform: rotate3d(0,1,0,-180deg);
+}
+
+.darreraP {
+    background: #999 url(../images/pokemon.jpg) -777px 0;
+}
+
+/** ---- BARAJA ESPAÑOLA ---- */
+
+.cartaE {
+    width: 78px; height: 120px;
+
+    position: absolute;
+    -webkit-perspective: 300px; /* Chrome, Safari, Opera  */
+    perspective: 300px; /*transition: all .3s; */
+ }
+
+.davantE {
+    background: #efefef url(../images/Baraja_espanola_completa_.png);
+    transform: rotate3d(0,1,0,-180deg);
+}
+
+.darreraE {
+    background: #999 url(../images/Baraja_espanola_completa_.png) -78px -480px; 
+}
+
+/* deck 
+W: 80px - H: 120px
+*/
 .carta1 {background-position: 0 0;}
 .carta2 {background-position: -80px 0;} 
 .carta3 {background-position: -160px 0;}
@@ -270,8 +358,9 @@ input[type="number"] {
 .carta52 {background-position: -960px -360px;}
 
 
-/* pokemon */
-/* fila 111 - columna 111 */
+/* pokemon 
+W: 111px - H: 111px
+*/
 .cartaP1{background-position:    0       0; }
 .cartaP2{background-position: -111px     0; }
 .cartaP3{background-position: -222px     0; }
@@ -298,17 +387,58 @@ input[type="number"] {
 .cartaP24{background-position:  -777px     -222px; }
 
 
-/* poker1 */
-/* fila 124 - columna 79 */
-.cartaE1{background-position:    0     0  ; }
-.cartaE2{background-position:  -79px   0  ; }
-.cartaE3{background-position: -158px   0  ; }
-.cartaE4{background-position:    0    -124px; }
-.cartaE5{background-position:  -79px  -124px; }
-.cartaE6{background-position:  -158px -124px; }
+/* baralla espanyola 
+W: 78px - H: 120px
+*/
 
-/*...
-.carta39{background-position:    -948px -248px; }
-/*...
-.carta40{background-position:    0   -372px; }
-/*...*/
+.cartaE1{background-position: 0 0; }
+.cartaE2{background-position: -78px 0; }
+.cartaE3{background-position: -156px 0; }
+.cartaE4{background-position: -234px 0; }
+.cartaE5{background-position: -312px 0; }
+.cartaE6{background-position: -390px 0; }
+.cartaE7{background-position: -468px 0; }
+.cartaE8{background-position: -546px 0; }
+.cartaE9{background-position: -624px 0; }
+.cartaE10{background-position: -702px 0; }
+.cartaE11{background-position: -780px 0; }
+.cartaE12{background-position: -858px 0; }
+
+.cartaE13{background-position: 0 -120px; }
+.cartaE14{background-position: -78px -120px; }
+.cartaE15{background-position: -156px -120px; }
+.cartaE16{background-position: -234px -120px; }
+.cartaE17{background-position: -312px -120px; }
+.cartaE18{background-position: -390px -120px; }
+.cartaE19{background-position: -468px -120px; }
+.cartaE20{background-position: -546px -120px; }
+.cartaE21{background-position: -624px -120px; }
+.cartaE22{background-position: -702px -120px; }
+.cartaE23{background-position: -780px -120px; }
+.cartaE24{background-position: -858px -120px; }
+
+.cartaE25{background-position: 0 -240px; }
+.cartaE26{background-position: -78px -240px; }
+.cartaE27{background-position: -156px -240px; }
+.cartaE28{background-position: -234px -240px; }
+.cartaE29{background-position: -312px -240px; }
+.cartaE30{background-position: -390px -240px; }
+.cartaE31{background-position: -468px -240px; }
+.cartaE32{background-position: -546px -240px; }
+.cartaE33{background-position: -624px -240px; }
+.cartaE34{background-position: -702px -240px; }
+.cartaE35{background-position: -780px -240px; }
+.cartaE36{background-position: -858px -240px; }
+
+.cartaE37{background-position: 0 -360px; }
+.cartaE38{background-position: -78px -360px; }
+.cartaE39{background-position: -156px -360px; }
+.cartaE40{background-position: -234px -360px; }
+.cartaE41{background-position: -312px -360px; }
+.cartaE42{background-position: -390px -360px; }
+.cartaE43{background-position: -468px -360px; }
+.cartaE44{background-position: -546px -360px; }
+.cartaE45{background-position: -624px -360px; }
+.cartaE46{background-position: -702px -360px; }
+.cartaE47{background-position: -780px -360px; }
+.cartaE48{background-position: -858px -360px; }
